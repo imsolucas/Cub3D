@@ -1,3 +1,4 @@
 .vscode/
 obj/
 objs/
+*.o
