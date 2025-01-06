@@ -2,3 +2,4 @@
 obj/
 objs/
 *.o
+*.a

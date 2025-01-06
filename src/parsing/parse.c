@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/06 12:54:46 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/01/06 13:09:58 by imsolucas        ###   ########.fr       */
+/*   Created: 2025/01/06 13:12:42 by imsolucas         #+#    #+#             */
+/*   Updated: 2025/01/06 13:12:54 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#include "cub3d.h"
 
-# include "libft.h"
-// # include "mlx.h"
-
-
-
-#endif
+void	parse(char *file)
+{
+	(void)file;
+	ft_putstr_fd("Parsing...\n", 1);
+}
