@@ -22,6 +22,9 @@ OBJ_DIR		= obj/
 INC_DIR		= includes/
 LIB_DIR		= lib/
 
+# Sources Directory
+PARSE_DIR = parsing/
+
 # Libraries
 LIBFT		= $(LIB_DIR)libft/libft.a
 PRINTF		= $(LIB_DIR)ft_printf/libftprintf.a
@@ -29,6 +32,7 @@ LIBS		= $(LIBFT) $(PRINTF)
 
 # Source files
 SRC_FILES	= main.c \
+			  $(addprefix $(PARSE_DIR), parse.c) \
 
 SRCS		= $(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJS		= $(addprefix $(OBJ_DIR), $(SRC_FILES:.c=.o))
@@ -48,9 +52,7 @@ CURR_FILE	= 0
 
 # Compilation rule with progress display
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	@if [ ! -d $(OBJ_DIR) ]; then \
-		$(MK) $(OBJ_DIR); \
-	fi
+	@$(MK) $(dir $@)
 	@$(eval CURR_FILE=$(shell echo $$(($(CURR_FILE) + 1))))
 	@printf "$(CLEAR)$(BLUE)➜ $(PURPLE)Compiling $(CYAN)%d/%d $(BLUE)%s$(RESET)" $(CURR_FILE) $(TOTAL_FILES) $<
 	@$(CC) $(CFLAGS) -c $< -o $@

@@ -6,11 +6,11 @@
 /*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:49:52 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/01/06 12:55:51 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/01/06 13:12:31 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "cub3d.h"
 
 int	main(void)
 {
