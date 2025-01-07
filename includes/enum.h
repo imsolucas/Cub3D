@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   enum.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/06 12:49:52 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/01/07 11:34:41 by imsolucas        ###   ########.fr       */
+/*   Created: 2025/01/07 10:25:15 by imsolucas         #+#    #+#             */
+/*   Updated: 2025/01/07 11:34:27 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#ifndef ENUM_H
+# define ENUM_H
 
-int	main(int argc, char **argv)
-{
-	t_game	game;
+# define BUFFER_SIZE 64
+# define TYPE_ERROR -1
+# define TYPE_EMPTY 0
+# define TYPE_TEXTURE 1
+# define TYPE_COLOR 2
+# define TYPE_MAP 3
 
-	if (argc != 2)
-	{
-		printf("Error\nInvalid number of arguments\n");
-		return (1);
-	}
-	parse(argv[1], &game);
-}
+#endif

@@ -12,7 +12,7 @@
 
 NAME		= cub3D
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -I./includes -I./lib/libft -I./lib/ft_printf -g3
+CFLAGS		= -Wall -Wextra -Werror -I./includes -I./lib/libft -I./lib/ft_printf -g3 -fsanitize=address
 RM			= rm -f
 MK			= mkdir -p
 
@@ -24,6 +24,8 @@ LIB_DIR		= lib/
 
 # Sources Directory
 PARSE_DIR = parsing/
+UTILS_DIR = utils/
+GNL_DIR = get_next_line/
 
 # Libraries
 LIBFT		= $(LIB_DIR)libft/libft.a
@@ -32,7 +34,9 @@ LIBS		= $(LIBFT) $(PRINTF)
 
 # Source files
 SRC_FILES	= main.c \
-			  $(addprefix $(PARSE_DIR), parse.c) \
+			  $(addprefix $(PARSE_DIR), parse.c ft_split_whitespace.c) \
+			  $(addprefix $(GNL_DIR), get_next_line.c) \
+			  $(addprefix $(UTILS_DIR), utils.c)
 
 SRCS		= $(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJS		= $(addprefix $(OBJ_DIR), $(SRC_FILES:.c=.o))
