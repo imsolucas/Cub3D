@@ -26,6 +26,7 @@ LIB_DIR		= lib/
 PARSE_DIR = parsing/
 UTILS_DIR = utils/
 GNL_DIR = get_next_line/
+DEBUG_DIR = debug/
 
 # Libraries
 LIBFT		= $(LIB_DIR)libft/libft.a
@@ -36,7 +37,8 @@ LIBS		= $(LIBFT) $(PRINTF)
 SRC_FILES	= main.c \
 			  $(addprefix $(PARSE_DIR), parse.c ft_split_whitespace.c) \
 			  $(addprefix $(GNL_DIR), get_next_line.c) \
-			  $(addprefix $(UTILS_DIR), utils.c)
+			  $(addprefix $(UTILS_DIR), utils.c) \
+			  $(addprefix $(DEBUG_DIR), debug.c) \
 
 SRCS		= $(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJS		= $(addprefix $(OBJ_DIR), $(SRC_FILES:.c=.o))

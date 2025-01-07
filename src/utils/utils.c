@@ -6,7 +6,7 @@
 /*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 11:09:39 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/01/07 11:37:24 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/01/07 15:57:45 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,31 @@ void	free_split(char **split)
 		i++;
 	}
 	free(split);
+}
+
+void	free_map(t_game *game)
+{
+	int	i;
+
+	i = 0;
+	while (i < game->map.rows)
+	{
+		free(game->map.map[i]);
+		i++;
+	}
+	free(game->map.map);
+}
+
+void	free_texture_path(t_game *game)
+{
+	if (game->north.path)
+		free(game->north.path);
+	if (game->south.path)
+		free(game->south.path);
+	if (game->west.path)
+		free(game->west.path);
+	if (game->east.path)
+		free(game->east.path);
 }
 
 // check for .cub type wether if it's texture, color or map
@@ -75,4 +100,13 @@ int	element_type(char *line)
 	}
 	free_split(split);
 	return (type);
+}
+
+bool	clean_and_error(char *line, int fd)
+{
+	if (line)
+		free(line);
+	if (fd > 0)
+		close(fd);
+	return (false);
 }

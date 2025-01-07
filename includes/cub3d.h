@@ -6,7 +6,7 @@
 /*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:54:46 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/01/07 11:23:46 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/01/07 15:58:08 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,10 @@ typedef struct s_game
 // utils.c
 bool	is_empty_line(char *line);
 void	free_split(char **split);
+void	free_texture_path(t_game *game);
+void	free_map(t_game *game);
 int		element_type(char *line);
+bool	clean_and_error(char *line, int fd);
 
 // parse.c
 void	parse(char *file, t_game *game);
@@ -69,5 +72,8 @@ char	*get_next_line(int fd);
 
 // ft_split_whitespace.c
 char	**ft_split_whitespace(char *str);
+
+// debug.c
+void	debug(t_game *game);
 
 #endif

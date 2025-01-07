@@ -6,7 +6,7 @@
 /*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 13:12:42 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/01/07 13:19:46 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/01/07 15:59:18 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,22 +41,39 @@ bool	parse_color(char **split, t_game *game)
 	return (true);
 }
 
+bool	parse_texture(char **split, t_game *game)
+{
+	if (!split[1] || split[2])
+		return (false);
+	
+	if (ft_strcmp(split[0], "NO") == 0)
+		game->north.path = ft_strdup(split[1]);
+	else if (ft_strcmp(split[0], "SO") == 0)
+		game->south.path = ft_strdup(split[1]);
+	else if (ft_strcmp(split[0], "WE") == 0)
+		game->west.path = ft_strdup(split[1]);
+	else if (ft_strcmp(split[0], "EA") == 0)
+		game->east.path = ft_strdup(split[1]);
+	else
+	{
+		free_split(split);
+		return (false);
+	}
+	free_split(split);
+	return (true);
+}
+
 bool	parse_element(char *line, t_game *game, int element_type)
 {
 	char	**split;
-	// int		i;
 
-	// i = 0;
-	(void)game;
 	split = ft_split_whitespace(line);
 	if (!split)
 		return (false);
 	if (element_type == TYPE_COLOR)
 		return (parse_color(split, game));
-	// else if (element_type == TYPE_TEXTURE)
-	// {
-	// 	//return (parse_texture(split, game));
-	// }
+	else if (element_type == TYPE_TEXTURE)
+		return (parse_texture(split, game));
 	free_split(split);
 	return (false);
 }
@@ -65,9 +82,8 @@ bool	parse_file(char *file, t_game *game)
 {
 	int		fd;
 	char	*line;
-	int		element_found;
+	int		element;
 
-	(void)game;
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		return (false);
@@ -78,12 +94,22 @@ bool	parse_file(char *file, t_game *game)
 			free(line);
 			continue ;
 		}
-		element_found = element_type(line);
-		if (element_found == TYPE_TEXTURE || element_found == TYPE_COLOR)
-			parse_element(line, game, element_found);
+		element = element_type(line);
+		if (element == TYPE_TEXTURE || element == TYPE_COLOR)
+		{
+			if(!parse_element(line, game, element))
+				return(clean_and_error(line, fd));
+		}
+		// else if (element == TYPE_MAP)
+		// {
+		// 	if (!parse_map(line, game))
+		// 		return(clean_and_error(line, fd));
+		// }
 		free(line);
 	}
-	printf("Map\n");
+	debug(game);
+	free_texture_path(game);
+	free_map(game);
 	return (true);
 }
 
