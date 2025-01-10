@@ -6,7 +6,7 @@
 /*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:54:46 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/01/07 15:58:08 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/01/10 09:47:40 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,16 @@ typedef struct s_texture
 typedef struct s_map
 {
 	char	**map;
-	int		rows;
-	int		cols;
+	int		width;
+	int		height;
 }	t_map;
+
+typedef struct s_player // New structure for player
+{
+	int		x;
+	int		y;
+	char	direction; // N, S, E, or W
+}	t_player;
 
 typedef struct s_color
 {
@@ -53,8 +60,15 @@ typedef struct s_game
 	t_texture	west;
 	t_color		floor;
 	t_color		ceiling;
+	t_player	player;
 	t_map		map;
 }	t_game;
+
+typedef struct s_point
+{
+	int	x;
+	int	y;
+}	t_point;
 
 // utils.c
 bool	is_empty_line(char *line);
@@ -66,6 +80,10 @@ bool	clean_and_error(char *line, int fd);
 
 // parse.c
 void	parse(char *file, t_game *game);
+
+// parse_map.c
+bool	parse_map(char *line, t_game *game);
+bool	validate_map(t_game *game);
 
 // get_next_line.c
 char	*get_next_line(int fd);

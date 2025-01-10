@@ -6,7 +6,7 @@
 /*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 13:12:42 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/01/07 15:59:18 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/01/10 09:48:39 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ bool	parse_texture(char **split, t_game *game)
 {
 	if (!split[1] || split[2])
 		return (false);
-	
 	if (ft_strcmp(split[0], "NO") == 0)
 		game->north.path = ft_strdup(split[1]);
 	else if (ft_strcmp(split[0], "SO") == 0)
@@ -97,14 +96,14 @@ bool	parse_file(char *file, t_game *game)
 		element = element_type(line);
 		if (element == TYPE_TEXTURE || element == TYPE_COLOR)
 		{
-			if(!parse_element(line, game, element))
-				return(clean_and_error(line, fd));
+			if (!parse_element(line, game, element))
+				return (clean_and_error(line, fd));
 		}
-		// else if (element == TYPE_MAP)
-		// {
-		// 	if (!parse_map(line, game))
-		// 		return(clean_and_error(line, fd));
-		// }
+		else if (element == TYPE_MAP)
+		{
+			if (!parse_map(line, game))
+				return (clean_and_error(line, fd));
+		}
 		free(line);
 	}
 	debug(game);
