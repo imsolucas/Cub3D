@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:49:52 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/01/13 11:24:33 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/01/13 12:16:46 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ int	main(int argc, char **argv)
 	parse(argv[1], &game);
 	init_mlx(&game);
 	mlx_loop(game.mlx);
+	cleanup(&game);
 	return (0);
 }
