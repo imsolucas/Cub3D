@@ -1,18 +1,6 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: yourusername <yourusername@student.42.fr>   +#+  +:+       +#+        #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/01/06 10:00:00 by yourusername      #+#    #+#             #
-#    Updated: 2025/01/06 10:00:00 by yourusername     ###   ########.fr       #
-#                                                                              #
-# **************************************************************************** #
-
 NAME		= cub3D
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -I./includes -I./lib/libft -I./lib/ft_printf -g3 -fsanitize=address
+CFLAGS		= -Wall -Wextra -Werror -I./includes -I./lib/libft -I./lib/ft_printf -I./lib/mlx_linux -g3 -fsanitize=address
 RM			= rm -f
 MK			= mkdir -p
 
@@ -27,18 +15,21 @@ PARSE_DIR = parsing/
 UTILS_DIR = utils/
 GNL_DIR = get_next_line/
 DEBUG_DIR = debug/
+INIT_DIR = init/
 
 # Libraries
 LIBFT		= $(LIB_DIR)libft/libft.a
 PRINTF		= $(LIB_DIR)ft_printf/libftprintf.a
-LIBS		= $(LIBFT) $(PRINTF)
+MLX			= $(LIB_DIR)mlx_linux/libmlx.a
+LIBS		= $(MLX) $(LIBFT) $(PRINTF)  
 
 # Source files
 SRC_FILES	= main.c \
 			  $(addprefix $(PARSE_DIR), parse.c ft_split_whitespace.c parse_map.c) \
 			  $(addprefix $(GNL_DIR), get_next_line.c) \
-			  $(addprefix $(UTILS_DIR), utils.c) \
+			  $(addprefix $(UTILS_DIR), utils.c error.c) \
 			  $(addprefix $(DEBUG_DIR), debug.c) \
+			  $(addprefix $(INIT_DIR), init_mlx.c init_elements.c) \
 
 SRCS		= $(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJS		= $(addprefix $(OBJ_DIR), $(SRC_FILES:.c=.o))
@@ -61,7 +52,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@$(MK) $(dir $@)
 	@$(eval CURR_FILE=$(shell echo $$(($(CURR_FILE) + 1))))
 	@printf "$(CLEAR)$(BLUE)➜ $(PURPLE)Compiling $(CYAN)%d/%d $(BLUE)%s$(RESET)" $(CURR_FILE) $(TOTAL_FILES) $<
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -Imlx_linux -O3 -c $< -o $@
 	@printf "$(GREEN) ✓$(RESET)\n"
 
 all: logo libs $(NAME)
@@ -73,6 +64,7 @@ libs:
 	@printf "$(BLUE)Building libraries...$(RESET)"
 	@make --no-print-directory -C $(LIB_DIR)libft >/dev/null
 	@make --no-print-directory -C $(LIB_DIR)ft_printf >/dev/null
+	@make --no-print-directory -C $(LIB_DIR)mlx_linux >/dev/null
 	@printf "$(GREEN) ✓$(RESET)\n"
 
 $(NAME): $(OBJS)
@@ -81,13 +73,14 @@ $(NAME): $(OBJS)
 		printf "." && sleep 0.2; \
 	done
 	@printf "\n"
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) -lX11 -lXext -lm -o $(NAME)
 	@printf "$(GREEN)$(BOLD)✨ Build successful! '$(NAME)' is ready.$(RESET)\n"
 
 clean:
 	@$(RM) -r $(OBJ_DIR)
 	@make --no-print-directory -C $(LIB_DIR)libft clean >/dev/null
 	@make --no-print-directory -C $(LIB_DIR)ft_printf clean >/dev/null
+	@make --no-print-directory -C $(LIB_DIR)mlx_linux clean >/dev/null
 	@printf "$(BLUE)🧹 Cleaned object files$(RESET)\n"
 
 fclean: clean
