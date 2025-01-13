@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 10:04:14 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/01/13 12:27:43 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/01/13 14:51:02 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void init_game(t_game *game)
 void	init_mlx(t_game *game)
 {
 	game->mlx = mlx_init();
+	if (!game->mlx)
 		error_exit("mlx_init failed");
 	if (!game->map.width || !game->map.height)
 	{
