@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/06 12:49:52 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/01/13 11:24:33 by abinti-a         ###   ########.fr       */
+/*   Created: 2025/01/13 10:04:14 by abinti-a          #+#    #+#             */
+/*   Updated: 2025/01/13 11:25:24 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(int argc, char **argv)
+void	init_mlx(t_game *game)
 {
-	t_game	game;
-
-	if (argc != 2)
-	{
-		printf("Error\nInvalid number of arguments\n");
-		return (1);
-	}
-	parse(argv[1], &game);
-	init_mlx(&game);
-	mlx_loop(game.mlx);
-	return (0);
+	game->mlx = mlx_init();
+	// game->win = mlx_new_window(game->mlx, game->map.width,
+	// 		game->map.height, "cub3D");
+	// height and width are not initialized yet
+	game->win = mlx_new_window(game->mlx, 1900,
+			1080, "cub3D");
 }

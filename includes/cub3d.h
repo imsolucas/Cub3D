@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
+/*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:54:46 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/01/10 09:47:40 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/01/13 11:22:17 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <stdbool.h>
 # include <stdint.h>
 # include "enum.h"
-// # include "mlx.h"
+# include "mlx.h"
 
 typedef struct s_texture
 {
@@ -54,6 +54,8 @@ typedef struct s_color
 
 typedef struct s_game
 {
+	void		*mlx;
+	void		*win;
 	t_texture	north;
 	t_texture	south;
 	t_texture	east;
@@ -90,6 +92,12 @@ char	*get_next_line(int fd);
 
 // ft_split_whitespace.c
 char	**ft_split_whitespace(char *str);
+
+// init_mlx.c
+void	init_mlx(t_game *game);
+
+// init_elements.c
+void	init_texture(t_game *game);
 
 // debug.c
 void	debug(t_game *game);
