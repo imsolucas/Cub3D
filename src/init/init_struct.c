@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 10:56:23 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/01/14 11:01:31 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/01/14 12:47:23 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,8 @@ void	init_struct(t_game *game)
 {
 	init_struct_game(game);
 	init_struct_texture(game);
-	game->floor.r = 0;
-	game->floor.g = 0;
-	game->floor.b = 0;
-	game->ceiling.r = 0;
-	game->ceiling.g = 0;
-	game->ceiling.b = 0;
 	init_struct_player(game);
-	game->map.map = NULL;
-	game->map.width = 0;
-	game->map.height = 0;
+    init_struct_map(game);
 }
 
 void	init_struct_game(t_game *game)
@@ -57,6 +49,12 @@ void	init_struct_texture(t_game *game)
 	game->west.img = NULL;
 	game->west.width = 0;
 	game->west.height = 0;
+	game->floor.r = 0;
+	game->floor.g = 0;
+	game->floor.b = 0;
+	game->ceiling.r = 0;
+	game->ceiling.g = 0;
+	game->ceiling.b = 0;
 }
 
 void	init_struct_player(t_game *game)
@@ -68,4 +66,11 @@ void	init_struct_player(t_game *game)
 	game->player.plane_x = 0.0;
 	game->player.plane_y = 0.0;
 	game->player.direction = '\0';
+}
+
+void	init_struct_map(t_game *game)
+{
+	game->map.map = NULL;
+	game->map.width = 0;
+	game->map.height = 0;
 }

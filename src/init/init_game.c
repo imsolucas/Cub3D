@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 10:04:14 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/01/14 11:13:16 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/01/14 12:52:29 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,11 @@ void	init_mlx(t_game *game)
 {
     game->mlx = mlx_init();
     if (!game->mlx)
+    {
         error_exit("mlx_init failed");
-	game->win = mlx_new_window(game->mlx, WIN_WIDTH,
-			WIN_HEIGHT, "cub3D");
-	if (!game->win)
+    }
+	game->win = mlx_new_window(game->mlx, WIN_WIDTH, WIN_HEIGHT, "cub3D");
+    if (!game->win)
 		error_exit("mlx_new_window failed");
 	game->img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
 		error_exit("mlx_new_image failed");

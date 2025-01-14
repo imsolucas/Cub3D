@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:54:46 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/01/14 11:08:36 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/01/14 12:49:46 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ void			init_struct(t_game *game);
 void			init_struct_game(t_game *game);
 void			init_struct_texture(t_game *game);
 void			init_struct_player(t_game *game);
+void			init_struct_map(t_game *game);
 
 // init_game.c
 void			init_game(t_game *game);
