@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:54:46 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/01/14 13:39:06 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/01/14 14:20:30 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,17 @@
 
 # define WIN_WIDTH 800
 # define WIN_HEIGHT 1600
+
+// keycodes
+# define UP 65362
+# define DOWN 65364
+# define LEFT 65361
+# define RIGHT 65363
+# define ESC 65307
+# define W 119
+# define A 97
+# define S 115
+# define D 100
 
 typedef struct s_texture
 {
