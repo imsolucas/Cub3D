@@ -29,7 +29,7 @@ SRC_FILES	= main.c \
 			  $(addprefix $(GNL_DIR), get_next_line.c) \
 			  $(addprefix $(UTILS_DIR), utils.c error.c) \
 			  $(addprefix $(DEBUG_DIR), debug.c) \
-			  $(addprefix $(INIT_DIR), init_mlx.c init_elements.c) \
+			  $(addprefix $(INIT_DIR), init_game.c init_elements.c init_struct.c) \
 
 SRCS		= $(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJS		= $(addprefix $(OBJ_DIR), $(SRC_FILES:.c=.o))

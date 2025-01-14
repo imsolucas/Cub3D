@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:54:46 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/01/14 10:24:14 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/01/14 11:08:36 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+
+# define WIN_WIDTH 800
+# define WIN_HEIGHT 1600
 
 typedef struct s_texture
 {
@@ -92,7 +95,7 @@ bool			clean_and_error(char *line, int fd);
 // error.c
 void			error_exit(char *message);
 void			free_map(t_game *game);
-void			cleanup(t_game *game);
+int				cleanup(t_game *game);
 
 // parse.c
 void			parse(char *file, t_game *game);
@@ -107,13 +110,19 @@ char			*get_next_line(int fd);
 // ft_split_whitespace.c
 char			**ft_split_whitespace(char *str);
 
-// init_mlx.c
-void init_game(t_game *game);
+// init_struct.c
+void			init_struct(t_game *game);
+void			init_struct_game(t_game *game);
+void			init_struct_texture(t_game *game);
+void			init_struct_player(t_game *game);
+
+// init_game.c
+void			init_game(t_game *game);
 void			init_mlx(t_game *game);
 
 // init_elements.c
 void			init_texture(t_game *game);
-void	init_player(t_game *game);
+void			init_player(t_game *game);
 
 // debug.c
 void			debug(t_game *game);
