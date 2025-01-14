@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 10:04:14 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/01/13 14:51:02 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/01/14 10:29:17 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void init_game(t_game *game)
 {
 	init_mlx(game);
 	init_texture(game);
-	// init_player(game);
+	init_player(game);
 }
 
 void	init_mlx(t_game *game)

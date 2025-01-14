@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:54:46 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/01/13 12:26:50 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/01/14 10:24:14 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,12 @@ typedef struct s_map
 
 typedef struct s_player // New structure for player
 {
-	int x;
-	int y;
+	double x;
+	double y;
+	double dir_x;
+	double dir_y;
+	double plane_x;
+	double plane_y;
 	char direction; // N, S, E, or W
 }				t_player;
 
@@ -104,10 +108,12 @@ char			*get_next_line(int fd);
 char			**ft_split_whitespace(char *str);
 
 // init_mlx.c
+void init_game(t_game *game);
 void			init_mlx(t_game *game);
 
 // init_elements.c
 void			init_texture(t_game *game);
+void	init_player(t_game *game);
 
 // debug.c
 void			debug(t_game *game);
