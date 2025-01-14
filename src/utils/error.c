@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 11:58:50 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/01/13 12:30:59 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/01/14 16:38:09 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void cleanup(t_game *game)
         mlx_destroy_display(game->mlx);
         free(game->mlx);
     }
-    if (game->map.map)
-        free_map(game);
+    // if (game->map.map)
+    free_map(game);
+	free_texture_path(game);
+	free(game);
 }

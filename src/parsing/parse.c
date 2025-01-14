@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 13:12:42 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/01/13 11:24:19 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/01/14 16:44:18 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,23 +107,14 @@ bool	parse_file(char *file, t_game *game)
 		free(line);
 	}
 	debug(game);
-	free_texture_path(game);
-	free_map(game);
 	return (true);
 }
 
 void	parse(char *file, t_game *game)
 {
-	game = ft_calloc(1, sizeof(t_game));
-	if (!game)
-	{
-		printf("Error\nMalloc failed\n");
-		exit(1);
-	}
 	if (!parse_file(file, game))
 	{
 		printf("Error\nInvalid file\n");
 		exit(1);
 	}
-	free(game);
 }
