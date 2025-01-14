@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 10:04:14 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/01/14 12:52:29 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/01/14 17:48:37 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	init_mlx(t_game *game)
     if (!game->win)
 		error_exit("mlx_new_window failed");
 	game->img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
+	if (!game->img)
 		error_exit("mlx_new_image failed");
 	game->addr = mlx_get_data_addr(game->img, &game->bits_per_pixel,
 			&game->line_length, &game->endian);
