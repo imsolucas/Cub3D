@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 09:24:45 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/01/14 10:20:37 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/01/14 13:38:34 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,56 +34,78 @@ void	init_texture(t_game *game)
 
 /**
  * Angle (in radians) converted to direction vector the player is facing:
- * 
- * - North (facing upwards): 
- * 		angle = π/2 
+ *
+ * - North (facing upwards):
+ * 		angle = π/2
  * 		(cos(π/2), sin(π/2)) = (0, -1)
- * 
- * - South (facing downwards): 
+ *
+ * - South (facing downwards):
  * 		angle = 3π/2
  * 		(cos(3π/2), sin(3π/2)) = (0, 1)
- * 
- * - East (facing right): 
- * 		angle = 0 
+ *
+ * - East (facing right):
+ * 		angle = 0
  * 		(cos(0), sin(0)) = (1, 0)
- * 
- * - West (facing left): 
+ *
+ * - West (facing left):
  * 		angle = π
  * 		(cos(π), sin(π)) = (-1, 0)
- * 
+ *
  * Field of View (FOV)
- * - 0.66 (66 degrees) is a common value in raycasting engines for a realistic perspective.
+ *
+	- 0.66 (66 degrees) is a common value in raycasting engines for a realistic perspective.
  */
 void	init_player(t_game *game)
 {
 	// game->move_speed = 0.05;
 	// game->rot_speed = 0.03;
+	find_player(game);
 	if (game->player.direction == 'N')
 	{
-		game->player.dir_x = 0;
 		game->player.dir_y = -1;
 		game->player.plane_x = 0.66;
-		game->player.plane_y = 0;
 	}
 	else if (game->player.direction == 'S')
 	{
-		game->player.dir_x = 0;
 		game->player.dir_y = 1;
 		game->player.plane_x = -0.66;
-		game->player.plane_y = 0;
 	}
 	else if (game->player.direction == 'E')
 	{
 		game->player.dir_x = 1;
-		game->player.dir_y = 0;
-		game->player.plane_x = 0;
 		game->player.plane_y = 0.66;
 	}
 	else if (game->player.direction == 'W')
 	{
 		game->player.dir_x = -1;
-		game->player.dir_y = 0;
-		game->player.plane_x = 0;
 		game->player.plane_y = -0.66;
 	}
+}
+
+void	find_player(t_game *game)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < game->map.height)
+	{
+		x = 0;
+		while (x < game->map.width)
+		{
+			if (valid_player_char(game->map.map[y][x]))
+			{
+				game->player.x = x + 0.5;
+				game->player.y = y + 0.5;
+				return ;
+			}
+			x++;
+		}
+		y++;
+	}
+}
+
+int	valid_player_char(char c)
+{
+	return (c == 'N' || c == 'S' || c == 'E' || c == 'W');
 }

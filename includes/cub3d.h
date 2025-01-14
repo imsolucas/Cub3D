@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:54:46 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/01/14 12:49:46 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/01/14 13:39:06 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,8 @@ void			init_mlx(t_game *game);
 // init_elements.c
 void			init_texture(t_game *game);
 void			init_player(t_game *game);
+void			find_player(t_game *game);
+int				valid_player_char(char c);
 
 // debug.c
 void			debug(t_game *game);
