@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:54:46 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/01/14 14:20:30 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/01/16 19:02:04 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CUB3D_H
 
 # include "enum.h"
+# include "raycast.h"
 # include "libft.h"
 # include "mlx.h"
 # include <fcntl.h>
@@ -22,6 +23,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <math.h>
 
 # define WIN_WIDTH 800
 # define WIN_HEIGHT 1600
@@ -87,6 +89,7 @@ typedef struct s_game
 	t_color		ceiling;
 	t_player	player;
 	t_map		map;
+	t_ray		ray;
 }				t_game;
 
 typedef struct s_point
@@ -126,7 +129,7 @@ void			init_struct(t_game *game);
 void			init_struct_game(t_game *game);
 void			init_struct_texture(t_game *game);
 void			init_struct_player(t_game *game);
-void			init_struct_map(t_game *game);
+void			init_struct_map_ray(t_game *game);
 
 // init_game.c
 void			init_game(t_game *game);
