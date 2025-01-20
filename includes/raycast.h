@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 15:29:17 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/01/20 11:19:34 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/01/20 15:12:44 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include "cub3d.h"
 
 typedef struct s_player	t_player;
+typedef struct s_color	t_color;
+typedef struct s_game	t_game;
 
 typedef struct s_ray
 {
@@ -45,5 +47,11 @@ void					init_raycast(t_ray *ray, t_player *player, int x);
 void					init_dda(t_ray *ray, t_player *player);
 void					start_dda(t_game *game, t_ray *ray);
 void					calc_line_height(t_ray *ray, t_player *player);
+
+// render.c
+int						render_frame(t_game *game);
+void					draw_floor_ceiling(t_game *game);
+int						rgb_to_hex(t_color color);
+void					put_pixel(t_game *game, int x, int y, int color);
 
 #endif

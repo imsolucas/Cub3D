@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 15:07:52 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/01/20 11:19:46 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/01/20 15:13:06 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	raycasting(t_game *game, t_ray *ray)
 		init_dda(ray, &game->player);
 		start_dda(game, ray);
 		calc_line_height(ray, &game->player);
-		draw_line(game, ray, x);
+		//draw_line(game, ray, x);
 		x++;
 	}
 	return (0);
@@ -109,6 +109,23 @@ void	start_dda(t_game *game, t_ray *ray)
 	}
 }
 
+/**
+ * perp_wall_dist = distance from the player to the wall along the ray's path
+ * perp_wall_dist is adjusted to avoid fish-eye distortion by considering 
+ * only the perpendicular component of the distance.
+ * 
+ * The wall's height on the screen is inversely proportional to perp_wall_dist
+ * 
+ * wall_x represents the exact position along the wall that was hit (in the range [0, 1]).
+ * If the wall was hit along the x-axis (side == 0), the wall's position is calculated based 
+ * on the player's y position and the y-component of the ray's direction.
+ * If the wall was hit along the y-axis (side == 1), the position is based on the player's x 
+ * position and the x-component of the ray's direction.
+ * 
+ * floor() = round down to the nearest integer
+ * floor() removes the integer part of ray->wall_x, leaving just the fractional part
+ * This fractional part is then used to map a specific portion of the texture to the wall being rendered
+ */
 void	calc_line_height(t_ray *ray, t_player *player)
 {
 	if (ray->side == 0)
