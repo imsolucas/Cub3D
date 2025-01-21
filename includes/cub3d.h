@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:54:46 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/01/13 12:26:50 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/01/21 14:24:38 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ typedef struct s_map
 
 typedef struct s_player // New structure for player
 {
-	int x;
-	int y;
-	char direction; // N, S, E, or W
+	int		x;
+	int		y;
+	char	direction; // N, S, E, or W
 }				t_player;
 
 typedef struct s_color
@@ -92,6 +92,12 @@ void			cleanup(t_game *game);
 
 // parse.c
 void			parse(char *file, t_game *game);
+bool			parse_file(char *file, t_game *game);
+
+// parse_utils.c
+bool			parse_element(char *line, t_game *game, int element_type);
+bool			parse_texture(char **split, t_game *game);
+bool			parse_color(char **split, t_game *game);
 
 // parse_map.c
 bool			parse_map(char *line, t_game *game);
@@ -111,5 +117,12 @@ void			init_texture(t_game *game);
 
 // debug.c
 void			debug(t_game *game);
+
+// validate_map.c
+bool			validate_map_closed(t_game *game);
+
+// validate_map_utils.c
+char			**duplicate_map(t_game *game);
+bool			validate_fill(char **map, t_point size);
 
 #endif

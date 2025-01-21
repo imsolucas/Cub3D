@@ -6,7 +6,7 @@
 /*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 11:58:50 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/01/14 16:38:09 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/01/21 13:57:15 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,27 +18,26 @@ void	error_exit(char *message)
 	exit(1);
 }
 
-void cleanup(t_game *game)
+void	cleanup(t_game *game)
 {
-    if (game->north.img)
-        mlx_destroy_image(game->mlx, game->north.img);
-    if (game->south.img)
-        mlx_destroy_image(game->mlx, game->south.img);
-    if (game->west.img)
-        mlx_destroy_image(game->mlx, game->west.img);
-    if (game->east.img)
-        mlx_destroy_image(game->mlx, game->east.img);
-    if (game->img)
-        mlx_destroy_image(game->mlx, game->img);
-    if (game->win)
-        mlx_destroy_window(game->mlx, game->win);
-    if (game->mlx)
-    {
-        mlx_destroy_display(game->mlx);
-        free(game->mlx);
-    }
-    // if (game->map.map)
-    free_map(game);
+	if (game->north.img)
+		mlx_destroy_image(game->mlx, game->north.img);
+	if (game->south.img)
+		mlx_destroy_image(game->mlx, game->south.img);
+	if (game->west.img)
+		mlx_destroy_image(game->mlx, game->west.img);
+	if (game->east.img)
+		mlx_destroy_image(game->mlx, game->east.img);
+	if (game->img)
+		mlx_destroy_image(game->mlx, game->img);
+	if (game->win)
+		mlx_destroy_window(game->mlx, game->win);
+	if (game->mlx)
+	{
+		mlx_destroy_display(game->mlx);
+		free(game->mlx);
+	}
+	free_map(game);
 	free_texture_path(game);
 	free(game);
 }
