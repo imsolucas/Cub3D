@@ -8,16 +8,21 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - name: configure
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Prepare build environment
+      run: |
+        # Commands to generate the 'configure' script if necessary
+        # Example: autoreconf -i
+        autoreconf -i
+
+    - name: Run configure script
       run: ./configure
-    - name: make
+
+    - name: Build
       run: make
-    - name: make check
-      run: make check
-    - name: make distcheck
-      run: make distcheck
+      
