@@ -6,7 +6,7 @@
 /*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 10:25:15 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/01/07 11:34:27 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/01/21 17:47:52 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,10 @@
 # define TYPE_TEXTURE 1
 # define TYPE_COLOR 2
 # define TYPE_MAP 3
+
+# define STATE_TEXTURE 0
+# define STATE_MAP 1
+# define STATE_COLOR 2
+# define STATE_ERROR 3
 
 #endif

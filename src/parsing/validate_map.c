@@ -6,24 +6,24 @@
 /*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:50:38 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/01/21 14:53:40 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/01/21 17:40:47 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static bool	find_player(t_game *game)
+static bool    find_player(t_game *game)
 {
-    bool	player_found;
-    int		i;
-    int		j;
+    bool    player_found;
+    int     i;
+    int     j;
 
     player_found = false;
-    i = 0;
-    while (i < game->map.height)
+    i = -1;
+    while (++i < game->map.height)
     {
-        j = 0;
-        while (j < game->map.width && game->map.map[i][j])
+        j = -1;
+        while (++j < game->map.width && game->map.map[i][j])
         {
             if (ft_strchr("NSEW", game->map.map[i][j]))
             {
@@ -34,9 +34,7 @@ static bool	find_player(t_game *game)
                 game->player.direction = game->map.map[i][j];
                 player_found = true;
             }
-            j++;
         }
-        i++;
     }
     return (player_found);
 }
@@ -66,6 +64,26 @@ static void	flood_fill_map(char **map, t_point start, t_point size)
 	flood_fill_recurse(map, start, size);
 }
 
+static bool check_boundaries(char **map, t_point size)
+{
+    int i = 0;
+    int j;
+
+    while (i < size.y)
+    {
+        j = 0;
+        while (j < size.x)
+        {
+            if ((i == 0 || i == size.y - 1 || j == 0 || j == size.x - 1) &&
+                map[i][j] != '1' && map[i][j] != ' ')
+                return (false);
+            j++;
+        }
+        i++;
+    }
+    return (true);
+}
+
 bool	validate_map_closed(t_game *game)
 {
 	char	**temp_map;
@@ -74,11 +92,19 @@ bool	validate_map_closed(t_game *game)
 	t_point	start;
 	int		i;
 
+	if (!game->map.map || game->map.height == 0)
+        return (false);
 	if (!find_player(game))
 		return (false);
 	temp_map = duplicate_map(game);
 	if (!temp_map)
 		return (false);
+	if (!check_boundaries(temp_map, (t_point){game->map.width, game->map.height}))
+	{
+		free_map(game);
+		free(temp_map);
+		return (false);
+	}
 	size.x = game->map.width;
 	size.y = game->map.height;
 	start.x = game->player.x;

@@ -6,7 +6,7 @@
 /*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 13:12:42 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/01/21 14:23:01 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/01/21 17:41:56 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,45 @@ static bool	process_line(char *line, t_game *game, int fd)
 	return (true);
 }
 
+static bool validate_textures(t_game *game)
+{
+    if (!game->north.path || !game->south.path || 
+        !game->west.path || !game->east.path)
+        return (false);
+    return (true);
+}
+
+static bool validate_element_order(int current_type, bool map_started)
+{
+    if (map_started && (current_type == TYPE_TEXTURE || current_type == TYPE_COLOR))
+        return (false);
+    return (true);
+}
+
 bool	parse_file(char *file, t_game *game)
 {
 	int		fd;
 	char	*line;
-
+	bool    map_started;
+	
+	map_started = false;
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		return (false);
 	line = get_next_line(fd);
 	while (line)
-	{
-		if (!process_line(line, game, fd))
-			return (false);
-		line = get_next_line(fd);
-	}
+    {
+        int type = element_type(line);
+        if (type == TYPE_MAP)
+            map_started = true;
+        if (!validate_element_order(type, map_started))
+            return (clean_and_error(line, fd));
+        if (!process_line(line, game, fd))
+            return (false);
+        line = get_next_line(fd);
+    }
+	if (!validate_textures(game))
+		return (clean_and_error(NULL, fd));
 	if (!validate_map_closed(game))
 		return (clean_and_error(NULL, fd));
 	debug(game);
