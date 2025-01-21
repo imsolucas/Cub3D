@@ -25,9 +25,9 @@ LIBS		= $(MLX) $(LIBFT) $(PRINTF)
 
 # Source files
 SRC_FILES	= main.c \
-			  $(addprefix $(PARSE_DIR), parse.c ft_split_whitespace.c parse_map.c) \
+			  $(addprefix $(PARSE_DIR), parse.c ft_split_whitespace.c parse_map.c parse_utils.c validate_map.c validate_map_utils.c) \
 			  $(addprefix $(GNL_DIR), get_next_line.c) \
-			  $(addprefix $(UTILS_DIR), utils.c error.c) \
+			  $(addprefix $(UTILS_DIR), utils.c utils2.c error.c) \
 			  $(addprefix $(DEBUG_DIR), debug.c) \
 			  $(addprefix $(INIT_DIR), init_mlx.c init_elements.c) \
 

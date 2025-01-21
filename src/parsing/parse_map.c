@@ -3,185 +3,87 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yourusername <yourusername@student.42.fr>   +#+  +:+       +#+      */
+/*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/10 10:00:00 by yourusername      #+#    #+#            */
-/*   Updated: 2025/01/10 10:00:00 by yourusername     ###   ########.fr      */
+/*   Created: 2025/01/16 14:47:18 by imsolucas         #+#    #+#             */
+/*   Updated: 2025/01/21 14:53:23 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static bool	flood_fill(char **map, int x, int y, t_game *game);
-static bool	is_valid_map(t_game *game);
-static bool	check_borders(t_game *game);
-static char	**copy_map(t_game *game);
+int	ft_max(int a, int b)
+{
+	if (a > b)
+		return (a);
+	return (b);
+}
+
+static bool	is_valid_map_char(char c)
+{
+	return (c == '0' || c == '1' || c == 'N' || c == 'S'
+		|| c == 'E' || c == 'W' || c == ' ' || c == '\n');
+}
+
+static bool	validate_map_chars(char *line)
+{
+	while (*line)
+	{
+		if (!is_valid_map_char(*line))
+			return (false);
+		line++;
+	}
+	return (true);
+}
+
+static bool	copy_line_to_map(char *line, t_game *game, int row)
+{
+    int		line_len;
+    int		i;
+    char	*map_line;
+
+    line_len = ft_strlen(line);
+    if (line[line_len - 1] == '\n')
+        line_len--;
+    game->map.width = ft_max(game->map.width, line_len);
+    map_line = malloc(sizeof(char) * (game->map.width + 1));
+    if (!map_line)
+        return (false);
+    i = 0;
+    while (i < line_len && line[i] != '\n')
+    {
+        map_line[i] = line[i];
+        i++;
+    }
+    while (i < game->map.width)
+        map_line[i++] = ' ';
+    map_line[i] = '\0';
+    game->map.map[row] = map_line;
+    return (true);
+}
 
 bool	parse_map(char *line, t_game *game)
 {
-	char	**new_map;
-	int		len;
-	int		i;
+	static int	row = 0;
+	char		**new_map;
 
-	if (!game->map.map)
-	{
-		new_map = (char **)ft_calloc(2, sizeof(char *));
-		if (!new_map)
-			return (false);
-		game->map.height = 1;
-	}
-	else
-	{
-		new_map = (char **)ft_calloc(game->map.height + 2, sizeof(char *));
-		if (!new_map)
-			return (false);
-		i = 0;
-		while (i < game->map.height)
-		{
-			new_map[i] = game->map.map[i];
-			i++;
-		}
-		game->map.height++;
-		free(game->map.map);
-	}
-	new_map[game->map.height - 1] = ft_strdup(line);
-	if (!new_map[game->map.height - 1])
-	{
-		free(new_map);
+	if (!validate_map_chars(line))
 		return (false);
+	if (row == 0)
+	{
+		game->map.height = 0;
+		game->map.width = 0;
+		game->map.map = NULL;
 	}
-	new_map[game->map.height] = NULL;
+	new_map = malloc(sizeof(char *) * (game->map.height + 1));
+	if (!new_map)
+		return (false);
+	ft_memcpy(new_map, game->map.map, sizeof(char *) * game->map.height);
+	free(game->map.map);
 	game->map.map = new_map;
-	len = ft_strlen(line);
-	if (len > game->map.width)
-		game->map.width = len;
+	game->map.height++;
+	if (!copy_line_to_map(line, game, row))
+		return (false);
+	row++;
 	return (true);
-}
-
-static bool	is_valid_map(t_game *game)
-{
-	int		x;
-	int		y;
-	bool	found_player;
-	char	c;
-
-	found_player = false;
-	y = 0;
-	while (y < game->map.height)
-	{
-		x = 0;
-		while (x < game->map.width)
-		{
-			c = game->map.map[y][x];
-			if (!ft_strchr("01NSEW ", c))
-				return (false);
-			if (ft_strchr("NSEW", c))
-			{
-				if (found_player)
-					return (false);
-				game->player.x = x;
-				game->player.y = y;
-				game->player.direction = c;
-				found_player = true;
-			}
-			x++;
-		}
-		y++;
-	}
-	return (found_player);
-}
-
-static bool	check_borders(t_game *game)
-{
-	int	i;
-
-	i = 0;
-	while (i < game->map.width)
-	{
-		if ((game->map.map[0][i] != '1' && game->map.map[0][i] != ' ') ||
-			(game->map.map[game->map.height - 1][i] != '1' &&
-			game->map.map[game->map.height - 1][i] != ' '))
-			return (false);
-		i++;
-	}
-	i = 0;
-	while (i < game->map.height)
-	{
-		if ((game->map.map[i][0] != '1' && game->map.map[i][0] != ' ') ||
-			(game->map.map[i][game->map.width - 1] != '1' &&
-			game->map.map[i][game->map.width - 1] != ' '))
-			return (false);
-		i++;
-	}
-	return (true);
-}
-
-static bool	flood_fill(char **map, int x, int y, t_game *game)
-{
-	if (x < 0 || x >= game->map.width || y < 0 || y >= game->map.height)
-		return (false);
-	if (map[y][x] == ' ')
-		return (false);
-	if (map[y][x] == '1' || map[y][x] == 'X')
-		return (true);
-	map[y][x] = 'X';
-	if (!flood_fill(map, x + 1, y, game))
-		return (false);
-	if (!flood_fill(map, x - 1, y, game))
-		return (false);
-	if (!flood_fill(map, x, y + 1, game))
-		return (false);
-	if (!flood_fill(map, x, y - 1, game))
-		return (false);
-	return (true);
-}
-
-static char	**copy_map(t_game *game)
-{
-	char	**copy;
-	int		i;
-	int		j;
-
-	copy = (char **)ft_calloc(game->map.height + 1, sizeof(char *));
-	if (!copy)
-		return (NULL);
-	i = 0;
-	while (i < game->map.height)
-	{
-		copy[i] = (char *)ft_calloc(game->map.width + 1, sizeof(char));
-		if (!copy[i])
-		{
-			while (--i >= 0)
-				free(copy[i]);
-			free(copy);
-			return (NULL);
-		}
-		j = 0;
-		while (j < game->map.width)
-		{
-			copy[i][j] = game->map.map[i][j];
-			j++;
-		}
-		copy[i][j] = '\0';
-		i++;
-	}
-	copy[i] = NULL;
-	return (copy);
-}
-
-bool	validate_map(t_game *game)
-{
-	char	**map_copy;
-	bool	is_valid;
-
-	if (!is_valid_map(game) || !check_borders(game))
-		return (false);
-	map_copy = copy_map(game);
-	if (!map_copy)
-		return (false);
-	is_valid = flood_fill(map_copy, game->player.x, game->player.y, game);
-	while (game->map.height--)
-		free(map_copy[game->map.height]);
-	free(map_copy);
-	return (is_valid);
 }

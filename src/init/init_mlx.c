@@ -3,20 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 10:04:14 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/01/13 14:51:02 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/01/21 14:26:27 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void init_game(t_game *game)
+void	init_game(t_game *game)
 {
 	init_mlx(game);
 	init_texture(game);
-	// init_player(game);
 }
 
 void	init_mlx(t_game *game)
@@ -34,11 +33,9 @@ void	init_mlx(t_game *game)
 	if (!game->win)
 		error_exit("mlx_new_window failed");
 	game->img = mlx_new_image(game->mlx, game->map.width, game->map.height);
-		error_exit("mlx_new_image failed");
+	error_exit("mlx_new_image failed");
 	game->addr = mlx_get_data_addr(game->img, &game->bits_per_pixel,
 			&game->line_length, &game->endian);
 	if (!game->addr)
 		error_exit("mlx_get_data_addr failed");
 }
-
-
