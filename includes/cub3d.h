@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:54:46 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/01/21 10:50:37 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/01/21 12:54:07 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@
 # include <unistd.h>
 # include <math.h>
 
-# define WIN_WIDTH 800
-# define WIN_HEIGHT 1600
+# define WIN_WIDTH 1600
+# define WIN_HEIGHT 800
+# define TEXTURE_WIDTH 128
+# define TEXTURE_HEIGHT 128
 
 // keycodes
 # define UP 65362
@@ -138,7 +140,7 @@ void			init_mlx(t_game *game);
 
 // init_elements.c
 void			init_texture(t_game *game);
-void			init_player(t_game *game);
+//void			init_player(t_game *game);
 void			find_player(t_game *game);
 int				valid_player_char(char c);
 

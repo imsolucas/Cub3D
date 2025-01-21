@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 15:07:52 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/01/20 15:13:06 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/01/21 11:11:27 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	raycasting(t_game *game, t_ray *ray)
 		init_dda(ray, &game->player);
 		start_dda(game, ray);
 		calc_line_height(ray, &game->player);
-		//draw_line(game, ray, x);
+		draw_line(game, ray, x);
 		x++;
 	}
 	return (0);
@@ -40,8 +40,7 @@ int	raycasting(t_game *game, t_ray *ray)
  *
  * player's x and y typcasted to int to get the map square the player is in
  *
-
-	* delta_dist_x and delta_dist_y: length of ray from one x or y-side to next x or y-side
+ * delta_dist_x and delta_dist_y: length of ray from one x or y-side to next x or y-side
  */
 void	init_raycast(t_ray *ray, t_player *player, int x)
 {

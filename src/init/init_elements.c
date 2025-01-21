@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 09:24:45 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/01/21 11:02:01 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/01/21 12:53:35 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,32 +66,32 @@ void	init_texture(t_game *game)
  *
 	- 0.66 (66 degrees) is a common value in raycasting engines for a realistic perspective.
  */
-void	init_player(t_game *game)
-{
-	// game->move_speed = 0.05;
-	// game->rot_speed = 0.03;
-	find_player(game);
-	if (game->player.direction == 'N')
-	{
-		game->player.dir_y = -1;
-		game->player.plane_x = 0.66;
-	}
-	else if (game->player.direction == 'S')
-	{
-		game->player.dir_y = 1;
-		game->player.plane_x = -0.66;
-	}
-	else if (game->player.direction == 'E')
-	{
-		game->player.dir_x = 1;
-		game->player.plane_y = 0.66;
-	}
-	else if (game->player.direction == 'W')
-	{
-		game->player.dir_x = -1;
-		game->player.plane_y = -0.66;
-	}
-}
+// void	init_player(t_game *game)
+// {
+// 	// game->move_speed = 0.05;
+// 	// game->rot_speed = 0.03;
+// 	find_player(game);
+// 	if (game->player.direction == 'N')
+// 	{
+// 		game->player.dir_y = -1;
+// 		game->player.plane_x = 0.66;
+// 	}
+// 	else if (game->player.direction == 'S')
+// 	{
+// 		game->player.dir_y = 1;
+// 		game->player.plane_x = -0.66;
+// 	}
+// 	else if (game->player.direction == 'E')
+// 	{
+// 		game->player.dir_x = 1;
+// 		game->player.plane_y = 0.66;
+// 	}
+// 	else if (game->player.direction == 'W')
+// 	{
+// 		game->player.dir_x = -1;
+// 		game->player.plane_y = -0.66;
+// 	}
+// }
 
 void	find_player(t_game *game)
 {
