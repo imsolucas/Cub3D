@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:54:46 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/01/16 19:02:04 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/01/21 10:50:37 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_texture
 {
 	char		*path;
 	void		*img;
+	void		*addr;
 	int			width;
 	int			height;
 }				t_texture;

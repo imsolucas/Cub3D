@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 09:24:45 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/01/14 13:38:34 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/01/21 11:02:01 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,32 @@
 
 void	init_texture(t_game *game)
 {
+	int tmp_bpp;
+	int tmp_line_len;
+	int tmp_endian;
+
 	game->north.img = mlx_xpm_file_to_image(game->mlx, game->north.path,
 			&game->north.width, &game->north.height);
-	if (!game->north.img)
+	game->north.addr = mlx_get_data_addr(game->north.img, &tmp_bpp,
+			&tmp_line_len, &tmp_endian);
+	if (!game->north.img || !game->north.addr)
 		error_exit("Failed to load North texture");
 	game->south.img = mlx_xpm_file_to_image(game->mlx, game->south.path,
 			&game->south.width, &game->south.height);
-	if (!game->south.img)
+	game->south.addr = mlx_get_data_addr(game->south.img, &tmp_bpp,
+			&tmp_line_len, &tmp_endian);
+	if (!game->south.img || !game->south.addr)
 		error_exit("Failed to load South texture");
 	game->east.img = mlx_xpm_file_to_image(game->mlx, game->east.path,
 			&game->east.width, &game->east.height);
-	if (!game->east.img)
+	game->east.addr = mlx_get_data_addr(game->east.img, &tmp_bpp,&tmp_line_len,
+			&tmp_endian);
+	if (!game->east.img || !game->east.addr)
 		error_exit("Failed to load East texture");
 	game->west.img = mlx_xpm_file_to_image(game->mlx, game->west.path,
 			&game->west.width, &game->west.height);
-	if (!game->west.img)
+	game->west.addr = mlx_get_data_addr(game->west.img, &tmp_bpp,&tmp_line_len, &tmp_endian);
+	if (!game->west.img || !game->west.addr)
 		error_exit("Failed to load West texture");
 }
 
