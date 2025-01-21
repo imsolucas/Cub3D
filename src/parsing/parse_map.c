@@ -6,7 +6,7 @@
 /*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:47:18 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/01/21 14:15:45 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/01/21 14:53:23 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,28 @@ static bool	validate_map_chars(char *line)
 
 static bool	copy_line_to_map(char *line, t_game *game, int row)
 {
-	int		line_len;
-	char	*map_line;
+    int		line_len;
+    int		i;
+    char	*map_line;
 
-	line_len = ft_strlen(line);
-	if (line[line_len - 1] == '\n')
-		line_len--;
-	game->map.width = ft_max(game->map.width, line_len);
-	map_line = malloc(sizeof(char) * (line_len + 1));
-	if (!map_line)
-		return (false);
-	ft_strlcpy(map_line, line, line_len + 1);
-	game->map.map[row] = map_line;
-	return (true);
+    line_len = ft_strlen(line);
+    if (line[line_len - 1] == '\n')
+        line_len--;
+    game->map.width = ft_max(game->map.width, line_len);
+    map_line = malloc(sizeof(char) * (game->map.width + 1));
+    if (!map_line)
+        return (false);
+    i = 0;
+    while (i < line_len && line[i] != '\n')
+    {
+        map_line[i] = line[i];
+        i++;
+    }
+    while (i < game->map.width)
+        map_line[i++] = ' ';
+    map_line[i] = '\0';
+    game->map.map[row] = map_line;
+    return (true);
 }
 
 bool	parse_map(char *line, t_game *game)
