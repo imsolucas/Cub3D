@@ -6,7 +6,7 @@
 /*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:50:38 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/01/21 17:40:47 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/01/22 13:49:26 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,21 @@ static bool check_boundaries(char **map, t_point size)
     return (true);
 }
 
+void free_temp_map(char **map, int height)
+{
+    int i;
+
+    if (!map)
+        return;
+    i = 0;
+    while (i < height)
+    {
+        free(map[i]);
+        i++;
+    }
+    free(map);
+}
+
 bool	validate_map_closed(t_game *game)
 {
 	char	**temp_map;
@@ -101,8 +116,7 @@ bool	validate_map_closed(t_game *game)
 		return (false);
 	if (!check_boundaries(temp_map, (t_point){game->map.width, game->map.height}))
 	{
-		free_map(game);
-		free(temp_map);
+		free_temp_map(temp_map, game->map.height);
 		return (false);
 	}
 	size.x = game->map.width;
