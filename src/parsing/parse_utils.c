@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:23:31 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/01/22 06:07:25 by codespace        ###   ########.fr       */
+/*   Updated: 2025/01/22 06:34:25 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ bool parse_element(char *line, t_game *game, int element_type)
     if (!split)
         return (false);
 
-    if (element_type == TYPE_COLOR)
+    if (element_type == TYPE_COLOR && (game->north.path || game->south.path || game->west.path || game->east.path))
         result = parse_color(split, game);
     else if (element_type == TYPE_TEXTURE)
         result = parse_texture(split, game);
