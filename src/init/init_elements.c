@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 09:24:45 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/01/23 07:31:42 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/01/23 07:42:41 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,57 +66,57 @@ void	init_texture(t_game *game)
  *
 	- 0.66 (66 degrees) is a common value in raycasting engines for a realistic perspective.
  */
-// void	init_player(t_game *game)
-// {
-// 	// game->move_speed = 0.05;
-// 	// game->rot_speed = 0.03;
-// 	find_player(game);
-// 	if (game->player.direction == 'N')
-// 	{
-// 		game->player.dir_y = -1;
-// 		game->player.plane_x = 0.66;
-// 	}
-// 	else if (game->player.direction == 'S')
-// 	{
-// 		game->player.dir_y = 1;
-// 		game->player.plane_x = -0.66;
-// 	}
-// 	else if (game->player.direction == 'E')
-// 	{
-// 		game->player.dir_x = 1;
-// 		game->player.plane_y = 0.66;
-// 	}
-// 	else if (game->player.direction == 'W')
-// 	{
-// 		game->player.dir_x = -1;
-// 		game->player.plane_y = -0.66;
-// 	}
-// }
-
-void	find_player(t_game *game)
+void	init_player(t_game *game)
 {
-	int	x;
-	int	y;
-
-	y = 0;
-	while (y < game->map.height)
+	// game->move_speed = 0.05;
+	// game->rot_speed = 0.03;
+	//find_player(game);
+	if (game->player.direction == 'N')
 	{
-		x = 0;
-		while (x < game->map.width)
-		{
-			if (valid_player_char(game->map.map[y][x]))
-			{
-				game->player.x = x + 0.5;
-				game->player.y = y + 0.5;
-				return ;
-			}
-			x++;
-		}
-		y++;
+		game->player.dir_y = -1;
+		game->player.plane_x = 0.66;
+	}
+	else if (game->player.direction == 'S')
+	{
+		game->player.dir_y = 1;
+		game->player.plane_x = -0.66;
+	}
+	else if (game->player.direction == 'E')
+	{
+		game->player.dir_x = 1;
+		game->player.plane_y = 0.66;
+	}
+	else if (game->player.direction == 'W')
+	{
+		game->player.dir_x = -1;
+		game->player.plane_y = -0.66;
 	}
 }
 
-int	valid_player_char(char c)
-{
-	return (c == 'N' || c == 'S' || c == 'E' || c == 'W');
-}
+// void	find_player(t_game *game)
+// {
+// 	int	x;
+// 	int	y;
+
+// 	y = 0;
+// 	while (y < game->map.height)
+// 	{
+// 		x = 0;
+// 		while (x < game->map.width)
+// 		{
+// 			if (valid_player_char(game->map.map[y][x]))
+// 			{
+// 				game->player.x = x + 0.5;
+// 				game->player.y = y + 0.5;
+// 				return ;
+// 			}
+// 			x++;
+// 		}
+// 		y++;
+// 	}
+// }
+
+// int	valid_player_char(char c)
+// {
+// 	return (c == 'N' || c == 'S' || c == 'E' || c == 'W');
+// }

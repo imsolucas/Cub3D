@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:54:46 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/01/23 07:28:12 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/01/23 07:44:39 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ bool			clean_and_error(char *line, int fd);
 // error.c
 void			error_exit(char *message);
 void			free_map(t_game *game);
-int				cleanup(t_game *game);
+void			cleanup(t_game *game);
 
 // parse.c
 void			parse(char *file, t_game *game);
@@ -146,8 +146,8 @@ void			init_mlx(t_game *game);
 
 // init_elements.c
 void			init_texture(t_game *game);
-//void			init_player(t_game *game);
-void			find_player(t_game *game);
+void			init_player(t_game *game);
+//void			find_player(t_game *game);
 int				valid_player_char(char c);
 
 // debug.c

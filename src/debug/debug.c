@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
+/*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:26:59 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/01/21 14:02:20 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/01/23 07:45:11 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ void	debug(t_game *game)
 		printf("%s\n", game->map.map[i]);
 		i++;
 	}
-	printf("Player: %d %d %c\n", game->player.x, game->player.y,
+	printf("Player: %f %f %c\n", game->player.x, game->player.y,
 		game->player.direction);
 }

@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 11:21:56 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/01/21 13:09:34 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/01/23 07:45:56 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,48 +20,48 @@ int	render_frame(t_game *game)
 	return (0);
 }
 
-void draw_line(t_game *game, t_ray *ray, int x)
-{
-	int	y;
-
-	y = 0;
-	while (y < WIN_HEIGHT)
-	{
-		if (y < ray->draw_start)
-			put_pixel(game, x, y, rgb_to_hex(game->ceiling));
-		else if (y >= ray->draw_start && y <= ray->draw_end)
-		{
-			// if (ray->side == 0)
-			// 	//put_pixel(game, x, y, rgb_to_hex(game->north[y][x]));
-			// else
-			// 	//put_pixel(game, x, y, rgb_to_hex(game->south.color));
-		}
-		else
-			put_pixel(game, x, y, rgb_to_hex(game->floor));
-		y++;
-	}
-}
-
-// void	draw_floor_ceiling(t_game *game)
+// void draw_line(t_game *game, t_ray *ray, int x)
 // {
-// 	int	x;
 // 	int	y;
 
 // 	y = 0;
 // 	while (y < WIN_HEIGHT)
 // 	{
-// 		x = 0;
-// 		while (x < WIN_WIDTH)
+// 		if (y < ray->draw_start)
+// 			put_pixel(game, x, y, rgb_to_hex(game->ceiling));
+// 		else if (y >= ray->draw_start && y <= ray->draw_end)
 // 		{
-// 			if (y < WIN_HEIGHT / 2)
-// 				put_pixel(game, x, y, rgb_to_hex(game->ceiling));
-// 			else
-// 				put_pixel(game, x, y, rgb_to_hex(game->floor));
-// 			x++;
+// 			// if (ray->side == 0)
+// 			// 	//put_pixel(game, x, y, rgb_to_hex(game->north[y][x]));
+// 			// else
+// 			// 	//put_pixel(game, x, y, rgb_to_hex(game->south.color));
 // 		}
+// 		else
+// 			put_pixel(game, x, y, rgb_to_hex(game->floor));
 // 		y++;
 // 	}
 // }
+
+void	draw_floor_ceiling(t_game *game)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < WIN_HEIGHT)
+	{
+		x = 0;
+		while (x < WIN_WIDTH)
+		{
+			if (y < WIN_HEIGHT / 2)
+				put_pixel(game, x, y, rgb_to_hex(game->ceiling));
+			else
+				put_pixel(game, x, y, rgb_to_hex(game->floor));
+			x++;
+		}
+		y++;
+	}
+}
 
 int	rgb_to_hex(t_color color)
 {

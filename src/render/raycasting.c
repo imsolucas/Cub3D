@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 15:07:52 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/01/21 11:11:27 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/01/23 07:46:09 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	raycasting(t_game *game, t_ray *ray)
 		init_dda(ray, &game->player);
 		start_dda(game, ray);
 		calc_line_height(ray, &game->player);
-		draw_line(game, ray, x);
+		//draw_line(game, ray, x);
 		x++;
 	}
 	return (0);
