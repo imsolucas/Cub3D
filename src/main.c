@@ -6,11 +6,16 @@
 /*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:49:52 by imsolucas         #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/01/21 17:42:32 by imsolucas        ###   ########.fr       */
+=======
+/*   Updated: 2025/01/21 13:10:21 by abinti-a         ###   ########.fr       */
+>>>>>>> feat/raycasting
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
 
 static bool is_valid_file(char *file)
 {
@@ -47,5 +52,6 @@ int	main(int argc, char **argv)
 	init_mlx(game);
 	mlx_loop(game->mlx);
 	cleanup(game);
-	return (0);
+    return (0);
 }
+
