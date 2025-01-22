@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 11:09:39 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/01/21 13:58:20 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/01/22 06:07:55 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,19 @@ bool	is_empty_line(char *line)
 	return (true);
 }
 
-void	free_split(char **split)
+void free_split(char **split)
 {
-	int	i;
+    int i;
 
-	i = 0;
-	while (split[i])
-	{
-		free(split[i]);
-		i++;
-	}
-	free(split);
+    if (!split)
+        return;
+    i = 0;
+    while (split[i])
+    {
+        free(split[i]);
+        i++;
+    }
+    free(split);
 }
 
 void	free_map(t_game *game)
