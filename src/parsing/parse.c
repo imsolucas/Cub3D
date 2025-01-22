@@ -3,44 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 13:12:42 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/01/21 17:41:56 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/01/22 06:09:11 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static bool	process_line(char *line, t_game *game, int fd)
+static bool process_line(char *line, t_game *game, int fd)
 {
-	int	element;
+    int element;
 
-	if (is_empty_line(line))
-	{
-		free(line);
-		return (true);
-	}
-	element = element_type(line);
-	if (element == TYPE_TEXTURE || element == TYPE_COLOR)
-	{
-		if (!parse_element(line, game, element))
-			return (clean_and_error(line, fd));
-	}
-	else if (element == TYPE_MAP)
-	{
-		if (!parse_map(line, game))
-			return (clean_and_error(line, fd));
-	}
-	free(line);
-	return (true);
+    if (is_empty_line(line))
+    {
+        free(line);
+        return (true);
+    }
+    element = element_type(line);
+    if (element == TYPE_TEXTURE || element == TYPE_COLOR)
+    {
+        if (!parse_element(line, game, element))
+        {
+            free(line);
+            close(fd);
+            return (false);
+        }
+    }
+    else if (element == TYPE_MAP)
+    {
+        if (!parse_map(line, game))
+        {
+            free(line);
+            close(fd);
+            return (false);
+        }
+    }
+    free(line);
+    return (true);
 }
 
 static bool validate_textures(t_game *game)
 {
     if (!game->north.path || !game->south.path || 
         !game->west.path || !game->east.path)
+    {
+        free_texture_path(game);  // Add this line
         return (false);
+    }
     return (true);
 }
 
