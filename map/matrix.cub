@@ -1,7 +1,7 @@
-NO textures/matrix.xpm
-SO textures/matrix.xpm
-WE textures/matrix.xpm
-EA textures/matrix.xpm
+NO textures/small-wall-1.xpm
+SO textures/small-wall-2.xpm
+WE textures/small-wall-3.xpm
+EA textures/small-wall-4.xpm
 
 F 220,0,0
 C 0,0,0

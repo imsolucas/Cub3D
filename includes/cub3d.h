@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:54:46 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/01/23 11:13:20 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/01/23 14:49:08 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,24 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define WIN_WIDTH 1200
-# define WIN_HEIGHT 800
+# define WIN_WIDTH 800
+# define WIN_HEIGHT 600
 # define TEXTURE_WIDTH 128
 # define TEXTURE_HEIGHT 128
 
 // keycodes
+// # define ESC 53
+// # define UP 126
+// # define DOWN 125
+// # define LEFT 123
+// # define RIGHT 124
+
+# define ESC 65307
 # define UP 65362
 # define DOWN 65364
 # define LEFT 65361
 # define RIGHT 65363
-# define ESC 65307
+
 # define W 119
 # define A 97
 # define S 115
@@ -108,6 +115,7 @@ void			free_texture_path(t_game *game);
 void			free_map(t_game *game);
 int				element_type(char *line);
 bool			clean_and_error(char *line, int fd);
+int				key_hook(int keycode, t_game *game);
 
 // error.c
 void			error_exit(char *message);
