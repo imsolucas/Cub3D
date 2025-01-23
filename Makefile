@@ -16,6 +16,7 @@ UTILS_DIR = utils/
 GNL_DIR = get_next_line/
 DEBUG_DIR = debug/
 INIT_DIR = init/
+RENDER_DIR = render/
 
 # Libraries
 LIBFT		= $(LIB_DIR)libft/libft.a
@@ -29,7 +30,8 @@ SRC_FILES	= main.c \
 			  $(addprefix $(GNL_DIR), get_next_line.c) \
 			  $(addprefix $(UTILS_DIR), utils.c utils2.c error.c) \
 			  $(addprefix $(DEBUG_DIR), debug.c) \
-			  $(addprefix $(INIT_DIR), init_mlx.c init_elements.c) \
+			  $(addprefix $(INIT_DIR), init_game.c init_elements.c init_struct.c) \
+			  $(addprefix $(RENDER_DIR), raycasting.c render.c render_utils.c) \
 
 SRCS		= $(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJS		= $(addprefix $(OBJ_DIR), $(SRC_FILES:.c=.o))

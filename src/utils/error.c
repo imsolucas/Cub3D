@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
+/*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 11:58:50 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/01/21 13:57:15 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/01/23 09:23:25 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 
 void	error_exit(char *message)
 {
-	printf("Error\n%s\n", message);
+	ft_putendl_fd("Error\n", 2);
+    ft_putendl_fd(message, 2);
 	exit(1);
 }
 
-void	cleanup(t_game *game)
+int	cleanup(t_game *game)
 {
 	if (game->north.img)
 		mlx_destroy_image(game->mlx, game->north.img);
@@ -40,4 +41,6 @@ void	cleanup(t_game *game)
 	free_map(game);
 	free_texture_path(game);
 	free(game);
+	exit(0);
+	return (0);
 }

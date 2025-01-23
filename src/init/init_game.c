@@ -1,39 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_mlx.c                                         :+:      :+:    :+:   */
+/*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
+/*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 10:04:14 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/01/21 14:26:27 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/01/23 11:10:40 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_game(t_game *game)
+void init_game(t_game *game)
 {
 	init_mlx(game);
 	init_texture(game);
+	init_player(game);
 }
 
 void	init_mlx(t_game *game)
 {
-	game->mlx = mlx_init();
-	if (!game->mlx)
-		error_exit("mlx_init failed");
-	if (!game->map.width || !game->map.height)
-	{
-		printf("Error\nNo height and width provided\n");
-		exit(1);
-	}
-	game->win = mlx_new_window(game->mlx, game->map.width,
-			game->map.height, "cub3D");
-	if (!game->win)
+    game->mlx = mlx_init();
+    if (!game->mlx)
+    {
+        error_exit("mlx_init failed");
+    }
+	game->win = mlx_new_window(game->mlx, WIN_WIDTH, WIN_HEIGHT, "cub3D");
+    if (!game->win)
 		error_exit("mlx_new_window failed");
-	game->img = mlx_new_image(game->mlx, game->map.width, game->map.height);
-	error_exit("mlx_new_image failed");
+	game->img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
+	if (!game->img)
+		error_exit("mlx_new_image failed");
 	game->addr = mlx_get_data_addr(game->img, &game->bits_per_pixel,
 			&game->line_length, &game->endian);
 	if (!game->addr)

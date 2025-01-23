@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
+/*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:54:46 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/01/21 14:24:38 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/01/23 11:13:20 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,36 @@
 # include "enum.h"
 # include "libft.h"
 # include "mlx.h"
+# include "raycast.h"
 # include <fcntl.h>
+# include <math.h>
 # include <stdbool.h>
 # include <stdint.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 
+# define WIN_WIDTH 1200
+# define WIN_HEIGHT 800
+# define TEXTURE_WIDTH 128
+# define TEXTURE_HEIGHT 128
+
+// keycodes
+# define UP 65362
+# define DOWN 65364
+# define LEFT 65361
+# define RIGHT 65363
+# define ESC 65307
+# define W 119
+# define A 97
+# define S 115
+# define D 100
+
 typedef struct s_texture
 {
 	char		*path;
 	void		*img;
+	void		*addr;
 	int			width;
 	int			height;
 }				t_texture;
@@ -40,9 +59,13 @@ typedef struct s_map
 
 typedef struct s_player // New structure for player
 {
-	int		x;
-	int		y;
-	char	direction; // N, S, E, or W
+	double x;
+	double y;
+	double dir_x;
+	double dir_y;
+	double plane_x;
+	double plane_y;
+	char direction; // N, S, E, or W
 }				t_player;
 
 typedef struct s_color
@@ -69,6 +92,7 @@ typedef struct s_game
 	t_color		ceiling;
 	t_player	player;
 	t_map		map;
+	t_ray		ray;
 }				t_game;
 
 typedef struct s_point
@@ -88,7 +112,7 @@ bool			clean_and_error(char *line, int fd);
 // error.c
 void			error_exit(char *message);
 void			free_map(t_game *game);
-void			cleanup(t_game *game);
+int				cleanup(t_game *game);
 
 // parse.c
 void			parse(char *file, t_game *game);
@@ -109,11 +133,22 @@ char			*get_next_line(int fd);
 // ft_split_whitespace.c
 char			**ft_split_whitespace(char *str);
 
-// init_mlx.c
+// init_struct.c
+void			init_struct(t_game *game);
+void			init_struct_game(t_game *game);
+void			init_struct_texture(t_game *game);
+void			init_struct_player(t_game *game);
+void			init_struct_map_ray(t_game *game);
+
+// init_game.c
+void			init_game(t_game *game);
 void			init_mlx(t_game *game);
 
 // init_elements.c
 void			init_texture(t_game *game);
+void			init_player(t_game *game);
+// void			find_player(t_game *game);
+int				valid_player_char(char c);
 
 // debug.c
 void			debug(t_game *game);

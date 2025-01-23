@@ -1,0 +1,15 @@
+NO ./textures/small-wall-1.xpm
+SO ./textures/small-wall-2.xpm
+WE ./textures/small-wall-3.xpm
+EA ./textures/small-wall-4.xpm
+
+F 50,50,50
+C 135,206,235
+
+1111111
+1010101
+1000001
+100N001
+1000001
+1010101
+1111111
