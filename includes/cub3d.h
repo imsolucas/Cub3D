@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
+/*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:54:46 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/01/23 14:49:08 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/01/23 16:05:39 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define WIN_HEIGHT 600
 # define TEXTURE_WIDTH 128
 # define TEXTURE_HEIGHT 128
+# define FRAME_DELAY 1000
 
 // keycodes
 // # define ESC 53
@@ -73,6 +74,12 @@ typedef struct s_player
 	double		plane_x;
 	double		plane_y;
 	char		direction;
+	bool		move_forward;
+	bool		move_backward;
+	bool		move_left;
+	bool		move_right;
+	bool		rotate_left;
+	bool		rotate_right;
 }				t_player;
 
 typedef struct s_color
@@ -91,6 +98,7 @@ typedef struct s_game
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
+	int			frame_delay;
 	t_texture	north;
 	t_texture	south;
 	t_texture	east;
@@ -166,5 +174,22 @@ bool			validate_map_closed(t_game *game);
 // validate_map_utils.c
 char			**duplicate_map(t_game *game);
 bool			validate_fill(char **map, t_point size);
+
+// direction.c
+void			move_forward(t_game *game);
+void			move_backward(t_game *game);
+void			move_left(t_game *game);
+void			move_right(t_game *game);
+
+// rotation.c
+void			rotate_right(t_game *game);
+void			rotate_left(t_game *game);
+
+// events.c
+int				loop_hook(t_game *game);
+int				key_hook(int keycode, t_game *game);
+void			move_player(t_game *game);
+int				loop_hook(t_game *game);
+int				key_release(int keycode, t_game *game);
 
 #endif

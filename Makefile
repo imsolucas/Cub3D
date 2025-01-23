@@ -17,6 +17,7 @@ GNL_DIR = get_next_line/
 DEBUG_DIR = debug/
 INIT_DIR = init/
 RENDER_DIR = render/
+MOVEMENT_DIR = movement/
 
 # Libraries
 LIBFT		= $(LIB_DIR)libft/libft.a
@@ -32,6 +33,7 @@ SRC_FILES	= main.c \
 			  $(addprefix $(DEBUG_DIR), debug.c) \
 			  $(addprefix $(INIT_DIR), init_game.c init_elements.c init_struct.c) \
 			  $(addprefix $(RENDER_DIR), raycasting.c render.c render_utils.c) \
+			  $(addprefix $(MOVEMENT_DIR), direction.c rotation.c events.c) \
 
 SRCS		= $(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJS		= $(addprefix $(OBJ_DIR), $(SRC_FILES:.c=.o))

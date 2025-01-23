@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
+/*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:49:52 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/01/23 13:18:47 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/01/23 16:02:29 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ int	main(int argc, char **argv)
 	init_struct(game);
 	parse(argv[1], game);
 	init_game(game);
-    // mlx_hook(game->win, 3, 1L << 1, key_release, game);
     mlx_hook(game->win, 2, 1L << 0, key_hook, game);
-    mlx_loop_hook(game->mlx, render_frame, game);
+	mlx_hook(game->win, 3, 1L << 1, key_release, game);
+    mlx_loop_hook(game->mlx, loop_hook, game);
     mlx_hook(game->win, 17, 1L << 17, cleanup, game);
 	mlx_loop(game->mlx);
 	return (0);

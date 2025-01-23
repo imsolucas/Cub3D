@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 10:56:23 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/01/23 14:11:33 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/01/23 15:50:12 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	init_struct_game(t_game *game)
 	game->bits_per_pixel = 0;
 	game->line_length = 0;
 	game->endian = 0;
+	game->frame_delay = 0;
 }
 
 void	init_struct_texture(t_game *game)
@@ -66,6 +67,12 @@ void	init_struct_player(t_game *game)
 	game->player.plane_x = 0.0;
 	game->player.plane_y = 0.0;
 	game->player.direction = '\0';
+	game->player.move_forward = false;
+	game->player.move_backward = false;
+	game->player.move_left = false;
+	game->player.move_right = false;
+	game->player.rotate_left = false;
+	game->player.rotate_right = false;
 }
 
 void	init_struct_map_ray(t_game *game)
