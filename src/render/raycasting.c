@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 15:07:52 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/01/23 07:46:09 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/01/23 11:26:53 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,11 @@ int	raycasting(t_game *game, t_ray *ray)
 	while (x < WIN_WIDTH)
 	{
 		init_raycast(ray, &game->player, x);
+		ray->hit = 0;
 		init_dda(ray, &game->player);
 		start_dda(game, ray);
 		calc_line_height(ray, &game->player);
-		//draw_line(game, ray, x);
+		draw_line(game, ray, x);
 		x++;
 	}
 	return (0);
@@ -53,6 +54,7 @@ void	init_raycast(t_ray *ray, t_player *player, int x)
 	ray->delta_dist_y = fabs(1 / ray->dir_y);
 }
 
+
 /**
  * x increases as you move right
  * y increases as you move down
@@ -80,6 +82,7 @@ void	init_dda(t_ray *ray, t_player *player)
 		ray->side_dist_y = (ray->map_y + 1.0 - player->y) * ray->delta_dist_y;
 	}
 }
+
 
 /**
  * In DDA, the shorter side_dist is chosen to move the ray to the next square

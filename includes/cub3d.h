@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:54:46 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/01/23 09:23:47 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/01/23 11:13:20 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 # define CUB3D_H
 
 # include "enum.h"
-# include "raycast.h"
 # include "libft.h"
 # include "mlx.h"
+# include "raycast.h"
 # include <fcntl.h>
+# include <math.h>
 # include <stdbool.h>
 # include <stdint.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <math.h>
 
-# define WIN_WIDTH 1600
+# define WIN_WIDTH 1200
 # define WIN_HEIGHT 800
 # define TEXTURE_WIDTH 128
 # define TEXTURE_HEIGHT 128
@@ -147,7 +147,7 @@ void			init_mlx(t_game *game);
 // init_elements.c
 void			init_texture(t_game *game);
 void			init_player(t_game *game);
-//void			find_player(t_game *game);
+// void			find_player(t_game *game);
 int				valid_player_char(char c);
 
 // debug.c
