@@ -6,7 +6,7 @@
 /*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 11:58:50 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/01/23 13:51:00 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/01/23 14:37:30 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,31 @@ void move_right(t_game *game)
 		game->player.y = new_y;
 }
 
+// Add rotation functions:
+void rotate_right(t_game *game)
+{
+    double old_dir_x = game->player.dir_x;
+    double old_plane_x = game->player.plane_x;
+    double rot_speed = ROT_SPEED;
+
+    game->player.dir_x = game->player.dir_x * cos(rot_speed) - game->player.dir_y * sin(rot_speed);
+    game->player.dir_y = old_dir_x * sin(rot_speed) + game->player.dir_y * cos(rot_speed);
+    game->player.plane_x = game->player.plane_x * cos(rot_speed) - game->player.plane_y * sin(rot_speed);
+    game->player.plane_y = old_plane_x * sin(rot_speed) + game->player.plane_y * cos(rot_speed);
+}
+
+void rotate_left(t_game *game)
+{
+	double old_dir_x = game->player.dir_x;
+	double old_plane_x = game->player.plane_x;
+	double rot_speed = ROT_SPEED;
+
+	game->player.dir_x = game->player.dir_x * cos(-rot_speed) - game->player.dir_y * sin(-rot_speed);
+	game->player.dir_y = old_dir_x * sin(-rot_speed) + game->player.dir_y * cos(-rot_speed);
+	game->player.plane_x = game->player.plane_x * cos(-rot_speed) - game->player.plane_y * sin(-rot_speed);
+	game->player.plane_y = old_plane_x * sin(-rot_speed) + game->player.plane_y * cos(-rot_speed);
+}
+
 int	key_hook(int keycode, t_game *game)
 {
 	if (keycode == ESC)
@@ -101,5 +126,9 @@ int	key_hook(int keycode, t_game *game)
 		move_left(game);
 	else if (keycode == D)
 		move_right(game);
+	else if (keycode == LEFT)
+		rotate_left(game);
+	else if (keycode == RIGHT)
+		rotate_right(game);
 	return (0);
 }
