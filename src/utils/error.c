@@ -15,7 +15,7 @@
 void	error_exit(char *message)
 {
 	ft_putendl_fd("Error\n", 2);
-    ft_putendl_fd(message, 2);
+	ft_putendl_fd(message, 2);
 	exit(1);
 }
 

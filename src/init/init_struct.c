@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 10:56:23 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/01/16 19:00:42 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/01/23 14:11:33 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	init_struct(t_game *game)
 	init_struct_game(game);
 	init_struct_texture(game);
 	init_struct_player(game);
-    init_struct_map_ray(game);
+	init_struct_map_ray(game);
 }
 
 void	init_struct_game(t_game *game)
@@ -88,7 +88,9 @@ void	init_struct_map_ray(t_game *game)
 	game->ray.step_y = 0;
 	game->ray.hit = 0;
 	game->ray.side = 0;
+	game->ray.tex_x = 0;
 	game->ray.line_height = 0;
 	game->ray.draw_start = 0;
 	game->ray.draw_end = 0;
+	game->ray.current_texture = NULL;
 }

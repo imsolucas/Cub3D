@@ -64,15 +64,15 @@ typedef struct s_map
 	int			height;
 }				t_map;
 
-typedef struct s_player // New structure for player
+typedef struct s_player
 {
-	double x;
-	double y;
-	double dir_x;
-	double dir_y;
-	double plane_x;
-	double plane_y;
-	char direction; // N, S, E, or W
+	double		x;
+	double		y;
+	double		dir_x;
+	double		dir_y;
+	double		plane_x;
+	double		plane_y;
+	char		direction;
 }				t_player;
 
 typedef struct s_color
@@ -154,9 +154,8 @@ void			init_mlx(t_game *game);
 
 // init_elements.c
 void			init_texture(t_game *game);
+void			get_texture_addr(t_game *game);
 void			init_player(t_game *game);
-// void			find_player(t_game *game);
-int				valid_player_char(char c);
 
 // debug.c
 void			debug(t_game *game);

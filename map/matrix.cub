@@ -3,8 +3,8 @@ SO textures/small-wall-2.xpm
 WE textures/small-wall-3.xpm
 EA textures/small-wall-4.xpm
 
-F 220,0,0
-C 0,0,0
+F 50,50,50
+C 135,206,235
 
 111111111111111111111
 101000001000000000001
