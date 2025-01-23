@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: djin <djin@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 15:38:20 by djin              #+#    #+#             */
-/*   Updated: 2024/04/11 16:04:18 by djin             ###   ########.fr       */
+/*   Updated: 2025/01/07 11:38:06 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ size_t		ft_strlcat(char *dest, const char *src, size_t size);
 
 int			ft_strlcpy(char *dest, const char *src, unsigned int size);
 
-int		ft_strlen(const char *str);
+int			ft_strlen(const char *str);
 
 char		*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 

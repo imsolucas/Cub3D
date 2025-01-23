@@ -1,0 +1,41 @@
+name: Build cub3D
+
+on:
+  push:
+    branches: [ "*" ]  # Run on all branches
+  pull_request:
+    branches: [ "*" ]  # Run on PRs targeting any branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y xorg libxext-dev zlib1g-dev libbsd-dev
+
+    - name: Install MinilibX
+      run: |
+        git clone https://github.com/42Paris/minilibx-linux.git
+        cd minilibx-linux
+        make
+        sudo cp mlx.h /usr/local/include
+        sudo cp libmlx.a /usr/local/lib
+        sudo cp /usr/local/lib/libmlx.a /usr/lib
+
+    - name: Build project
+      run: make
+
+    - name: Clean project
+      run: make clean
+
+    - name: Check compilation artifacts
+      run: |
+        if [ ! -f "cub3D" ]; then
+          echo "cub3D executable not found!"
+          exit 1
+        fi
