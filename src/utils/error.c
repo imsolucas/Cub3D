@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 11:58:50 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/01/23 09:23:25 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/01/23 14:14:25 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	error_exit(char *message)
 {
 	ft_putendl_fd("Error\n", 2);
-    ft_putendl_fd(message, 2);
+	ft_putendl_fd(message, 2);
 	exit(1);
 }
 

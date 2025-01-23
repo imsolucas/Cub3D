@@ -6,13 +6,13 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 10:04:14 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/01/23 11:10:40 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/01/23 14:05:00 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void init_game(t_game *game)
+void	init_game(t_game *game)
 {
 	init_mlx(game);
 	init_texture(game);
@@ -21,13 +21,13 @@ void init_game(t_game *game)
 
 void	init_mlx(t_game *game)
 {
-    game->mlx = mlx_init();
-    if (!game->mlx)
-    {
-        error_exit("mlx_init failed");
-    }
+	game->mlx = mlx_init();
+	if (!game->mlx)
+	{
+		error_exit("mlx_init failed");
+	}
 	game->win = mlx_new_window(game->mlx, WIN_WIDTH, WIN_HEIGHT, "cub3D");
-    if (!game->win)
+	if (!game->win)
 		error_exit("mlx_new_window failed");
 	game->img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
 	if (!game->img)
