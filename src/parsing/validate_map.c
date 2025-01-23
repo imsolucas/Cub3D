@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
+/*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:50:38 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/01/22 13:49:26 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/01/23 09:20:07 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ static bool    find_player(t_game *game)
             {
                 if (player_found)
                     return (false);
-                game->player.x = j;
-                game->player.y = i;
+                game->player.x = j + 0.5;
+                game->player.y = i + 0.5;
                 game->player.direction = game->map.map[i][j];
                 player_found = true;
             }

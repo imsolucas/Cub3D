@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 11:58:50 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/01/23 07:31:02 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/01/23 09:23:25 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	error_exit(char *message)
 	exit(1);
 }
 
-void	cleanup(t_game *game)
+int	cleanup(t_game *game)
 {
 	if (game->north.img)
 		mlx_destroy_image(game->mlx, game->north.img);
@@ -41,4 +41,6 @@ void	cleanup(t_game *game)
 	free_map(game);
 	free_texture_path(game);
 	free(game);
+	exit(0);
+	return (0);
 }
