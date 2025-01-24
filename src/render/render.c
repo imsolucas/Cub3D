@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 11:21:56 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/01/23 16:04:40 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/01/24 14:30:09 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	render_frame(t_game *game)
 {
 	draw_floor_ceiling(game);
 	raycasting(game, &game->ray);
+	draw_minimap(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
 	return (0);
 }

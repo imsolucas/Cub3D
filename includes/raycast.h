@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 15:29:17 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/01/23 14:03:33 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/01/24 14:00:50 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,7 @@ void						draw_floor_ceiling(t_game *game);
 int							rgb_to_hex(t_color color);
 void						put_pixel(t_game *game, int x, int y, int color);
 int							get_texture_color(t_texture *texture, int x, int y);
+
+void draw_minimap(t_game *game);
 
 #endif

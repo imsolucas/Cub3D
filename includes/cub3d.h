@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:54:46 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/01/23 16:05:39 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/01/24 12:32:35 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define WIN_WIDTH 800
-# define WIN_HEIGHT 600
+# define WIN_WIDTH 1800
+# define WIN_HEIGHT 900
 # define TEXTURE_WIDTH 128
 # define TEXTURE_HEIGHT 128
 # define FRAME_DELAY 1000
