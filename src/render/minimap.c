@@ -6,14 +6,14 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:22:57 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/01/24 14:29:20 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/01/24 15:19:27 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 #define MINIMAP_SIZE 200
-#define MINIMAP_SCALE 30
+#define MINIMAP_SCALE 15
 #define MINIMAP_BORDER_COLOR 0xFFFFFF
 #define MINIMAP_BACKGROUND_COLOR 0x000000
 
@@ -172,6 +172,9 @@ void	draw_minimap(t_game *game)
 	double	ray_dir_y;
 	int		map_x;
 	int		map_y;
+	int		player_square_size;
+	int		player_draw_x;
+	int		player_draw_y;
 
 	draw_minimap_border(game);
 	y = -1;
@@ -188,9 +191,13 @@ void	draw_minimap(t_game *game)
 					MINIMAP_SCALE, 0x666666);
 		}
 	}
-	draw_square(game, (int)((game->player.x - 0.5) * MINIMAP_SCALE) + 2
-		+ (MINIMAP_SCALE / 3) / 2, (int)((game->player.y - 0.5) * MINIMAP_SCALE)
-		+ 2 + (MINIMAP_SCALE / 3) / 2, MINIMAP_SCALE, 0xFFFF00);
+	player_square_size = MINIMAP_SCALE;
+	player_draw_x = (int)((game->player.x * MINIMAP_SCALE) + 2
+			- (player_square_size / 2));
+	player_draw_y = (int)((game->player.y * MINIMAP_SCALE) + 2
+			- (player_square_size / 2));
+	draw_square(game, player_draw_x, player_draw_y, player_square_size,
+		0xFFFF00);
 	ray_x = game->player.x;
 	ray_y = game->player.y;
 	ray_dir_x = game->player.dir_x;
@@ -202,8 +209,9 @@ void	draw_minimap(t_game *game)
 		if (map_x < 0 || map_y < 0 || map_x >= game->map.width
 			|| map_y >= game->map.height || game->map.map[map_y][map_x] == '1')
 			break ;
-		draw_square(game, (int)(ray_x * MINIMAP_SCALE) + 2, (int)(ray_y
-				* MINIMAP_SCALE) + 2, MINIMAP_SCALE / 5, 0xFF0000);
+		draw_square(game, (int)((ray_x * MINIMAP_SCALE) + 2 - (MINIMAP_SCALE
+					/ 10)), (int)((ray_y * MINIMAP_SCALE) + 2 - (MINIMAP_SCALE
+					/ 10)), MINIMAP_SCALE / 5, 0xFF0000);
 		ray_x += ray_dir_x * 0.1;
 		ray_y += ray_dir_y * 0.1;
 	}
