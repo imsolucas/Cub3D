@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 13:12:42 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/01/22 06:27:37 by codespace        ###   ########.fr       */
+/*   Updated: 2025/01/27 15:23:52 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,12 @@ static bool validate_textures(t_game *game)
         free_texture_path(game);  // Add this line
         return (false);
     }
+	if (game->floor.r == -1 || game->floor.g == -1 || game->floor.b == -1 ||
+        game->ceiling.r == -1 || game->ceiling.g == -1 || game->ceiling.b == -1)
+	{
+		free_texture_path(game);
+		return (false);
+	}
     return (true);
 }
 

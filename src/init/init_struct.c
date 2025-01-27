@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 10:56:23 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/01/16 19:00:42 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/01/27 15:25:25 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	init_struct(t_game *game)
 	init_struct_game(game);
 	init_struct_texture(game);
 	init_struct_player(game);
-    init_struct_map_ray(game);
+	init_struct_map_ray(game);
 }
 
 void	init_struct_game(t_game *game)
@@ -29,6 +29,7 @@ void	init_struct_game(t_game *game)
 	game->bits_per_pixel = 0;
 	game->line_length = 0;
 	game->endian = 0;
+	game->frame_delay = 0;
 }
 
 void	init_struct_texture(t_game *game)
@@ -49,12 +50,12 @@ void	init_struct_texture(t_game *game)
 	game->west.img = NULL;
 	game->west.width = 0;
 	game->west.height = 0;
-	game->floor.r = 0;
-	game->floor.g = 0;
-	game->floor.b = 0;
-	game->ceiling.r = 0;
-	game->ceiling.g = 0;
-	game->ceiling.b = 0;
+	game->floor.r = -1;
+	game->floor.g = -1;
+	game->floor.b = -1;
+	game->ceiling.r = -1;
+	game->ceiling.g = -1;
+	game->ceiling.b = -1;
 }
 
 void	init_struct_player(t_game *game)
@@ -66,6 +67,12 @@ void	init_struct_player(t_game *game)
 	game->player.plane_x = 0.0;
 	game->player.plane_y = 0.0;
 	game->player.direction = '\0';
+	game->player.move_forward = false;
+	game->player.move_backward = false;
+	game->player.move_left = false;
+	game->player.move_right = false;
+	game->player.rotate_left = false;
+	game->player.rotate_right = false;
 }
 
 void	init_struct_map_ray(t_game *game)
@@ -88,7 +95,9 @@ void	init_struct_map_ray(t_game *game)
 	game->ray.step_y = 0;
 	game->ray.hit = 0;
 	game->ray.side = 0;
+	game->ray.tex_x = 0;
 	game->ray.line_height = 0;
 	game->ray.draw_start = 0;
 	game->ray.draw_end = 0;
+	game->ray.current_texture = NULL;
 }

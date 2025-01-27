@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 15:07:52 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/01/23 11:26:53 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/01/23 14:14:03 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ int	raycasting(t_game *game, t_ray *ray)
  *
  * player's x and y typcasted to int to get the map square the player is in
  *
- * delta_dist_x and delta_dist_y: length of ray from one x or y-side to next x or y-side
+ * delta_dist_x and delta_dist_y: length of ray from one x or y-side to 
+ * next x or y-side
  */
 void	init_raycast(t_ray *ray, t_player *player, int x)
 {
@@ -53,7 +54,6 @@ void	init_raycast(t_ray *ray, t_player *player, int x)
 	ray->delta_dist_x = fabs(1 / ray->dir_x);
 	ray->delta_dist_y = fabs(1 / ray->dir_y);
 }
-
 
 /**
  * x increases as you move right
@@ -82,7 +82,6 @@ void	init_dda(t_ray *ray, t_player *player)
 		ray->side_dist_y = (ray->map_y + 1.0 - player->y) * ray->delta_dist_y;
 	}
 }
-
 
 /**
  * In DDA, the shorter side_dist is chosen to move the ray to the next square
@@ -118,15 +117,18 @@ void	start_dda(t_game *game, t_ray *ray)
  * 
  * The wall's height on the screen is inversely proportional to perp_wall_dist
  * 
- * wall_x represents the exact position along the wall that was hit (in the range [0, 1]).
- * If the wall was hit along the x-axis (side == 0), the wall's position is calculated based 
+ * wall_x represents the exact position along the wall that was hit 
+ * (in the range [0, 1]).
+ * If the wall was hit along the x-axis (side == 0), the wall's position is 
+ * calculated based 
  * on the player's y position and the y-component of the ray's direction.
- * If the wall was hit along the y-axis (side == 1), the position is based on the player's x 
- * position and the x-component of the ray's direction.
+ * If the wall was hit along the y-axis (side == 1), the position is based 
+ * on the player's x position and the x-component of the ray's direction.
  * 
  * floor() = round down to the nearest integer
- * floor() removes the integer part of ray->wall_x, leaving just the fractional part
- * This fractional part is then used to map a specific portion of the texture to the wall being rendered
+ * floor() removes the integer part of ray->wall_x, leaving just the fractional 
+ * part. This fractional part is then used to map a specific portion of the 
+ * texture to the wall being rendered
  */
 void	calc_line_height(t_ray *ray, t_player *player)
 {

@@ -6,7 +6,7 @@
 /*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:54:46 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/01/23 14:49:08 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/01/27 15:11:59 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define WIN_HEIGHT 600
 # define TEXTURE_WIDTH 128
 # define TEXTURE_HEIGHT 128
+# define FRAME_DELAY 200
 
 // keycodes
 // # define ESC 53
@@ -42,6 +43,7 @@
 # define DOWN 65364
 # define LEFT 65361
 # define RIGHT 65363
+# define SHIFT 65505
 
 # define W 119
 # define A 97
@@ -64,15 +66,22 @@ typedef struct s_map
 	int			height;
 }				t_map;
 
-typedef struct s_player // New structure for player
+typedef struct s_player
 {
-	double x;
-	double y;
-	double dir_x;
-	double dir_y;
-	double plane_x;
-	double plane_y;
-	char direction; // N, S, E, or W
+	double		x;
+	double		y;
+	double		dir_x;
+	double		dir_y;
+	double		plane_x;
+	double		plane_y;
+	char		direction;
+	bool		move_forward;
+	bool		move_backward;
+	bool		move_left;
+	bool		move_right;
+	bool		rotate_left;
+	bool		rotate_right;
+	bool		sprint;
 }				t_player;
 
 typedef struct s_color
@@ -91,6 +100,7 @@ typedef struct s_game
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
+	int			frame_delay;
 	t_texture	north;
 	t_texture	south;
 	t_texture	east;
@@ -115,6 +125,8 @@ void			free_texture_path(t_game *game);
 void			free_map(t_game *game);
 int				element_type(char *line);
 bool			clean_and_error(char *line, int fd);
+
+int				key_press(int keycode, t_game *vars);
 int				key_hook(int keycode, t_game *game);
 
 // error.c
@@ -154,9 +166,8 @@ void			init_mlx(t_game *game);
 
 // init_elements.c
 void			init_texture(t_game *game);
+void			get_texture_addr(t_game *game);
 void			init_player(t_game *game);
-// void			find_player(t_game *game);
-int				valid_player_char(char c);
 
 // debug.c
 void			debug(t_game *game);
@@ -167,5 +178,22 @@ bool			validate_map_closed(t_game *game);
 // validate_map_utils.c
 char			**duplicate_map(t_game *game);
 bool			validate_fill(char **map, t_point size);
+
+// direction.c
+void			move_forward(t_game *game);
+void			move_backward(t_game *game);
+void			move_left(t_game *game);
+void			move_right(t_game *game);
+
+// rotation.c
+void			rotate_right(t_game *game);
+void			rotate_left(t_game *game);
+
+// events.c
+int				loop_hook(t_game *game);
+int				key_hook(int keycode, t_game *game);
+void			move_player(t_game *game);
+int				loop_hook(t_game *game);
+int				key_release(int keycode, t_game *game);
 
 #endif
