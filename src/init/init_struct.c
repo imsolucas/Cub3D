@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 10:56:23 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/01/23 15:50:12 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/01/27 15:25:25 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ void	init_struct_texture(t_game *game)
 	game->west.img = NULL;
 	game->west.width = 0;
 	game->west.height = 0;
-	game->floor.r = 0;
-	game->floor.g = 0;
-	game->floor.b = 0;
-	game->ceiling.r = 0;
-	game->ceiling.g = 0;
-	game->ceiling.b = 0;
+	game->floor.r = -1;
+	game->floor.g = -1;
+	game->floor.b = -1;
+	game->ceiling.r = -1;
+	game->ceiling.g = -1;
+	game->ceiling.b = -1;
 }
 
 void	init_struct_player(t_game *game)

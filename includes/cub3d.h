@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:54:46 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/01/23 16:05:39 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/01/27 15:11:59 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define WIN_HEIGHT 600
 # define TEXTURE_WIDTH 128
 # define TEXTURE_HEIGHT 128
-# define FRAME_DELAY 1000
+# define FRAME_DELAY 200
 
 // keycodes
 // # define ESC 53
@@ -43,6 +43,7 @@
 # define DOWN 65364
 # define LEFT 65361
 # define RIGHT 65363
+# define SHIFT 65505
 
 # define W 119
 # define A 97
@@ -80,6 +81,7 @@ typedef struct s_player
 	bool		move_right;
 	bool		rotate_left;
 	bool		rotate_right;
+	bool		sprint;
 }				t_player;
 
 typedef struct s_color
@@ -123,6 +125,8 @@ void			free_texture_path(t_game *game);
 void			free_map(t_game *game);
 int				element_type(char *line);
 bool			clean_and_error(char *line, int fd);
+
+int				key_press(int keycode, t_game *vars);
 int				key_hook(int keycode, t_game *game);
 
 // error.c

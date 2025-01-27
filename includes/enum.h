@@ -6,7 +6,7 @@
 /*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 10:25:15 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/01/23 14:35:28 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/01/27 15:17:35 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # define STATE_ERROR 3
 
 # define MOVE_SPEED 0.1
+# define SPRINT_SPEED 0.25
 # define ROT_SPEED 0.1
 
 #endif
