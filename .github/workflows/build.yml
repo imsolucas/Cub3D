@@ -42,16 +42,10 @@ jobs:
           echo "cub3D executable not found!"
           exit 1
         fi
-        if [ ! -f "cub3D" ]; then
-          echo "cub3D_bonus executable not found!"
-          exit 1
-        fi
         
-    - name: Test executables
+    - name: Test executable
       run: |
-        # Test if executables are properly built and linked
+        # Test if executable is properly built and linked
         ldd ./cub3D
-        ldd ./cub3D
-        # Test if executables have correct permissions
-        test -x ./cub3D
+        # Test if executable has correct permissions
         test -x ./cub3D
