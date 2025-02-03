@@ -6,7 +6,7 @@
 /*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:54:46 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/01/27 15:11:59 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/02/03 15:23:00 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,11 @@
 # define A 97
 # define S 115
 # define D 100
+
+// Mouse settings
+# define MOUSE_SENSITIVITY 0.00002
+# define MOUSE_CENTER_X (WIN_WIDTH / 2)
+# define MOUSE_CENTER_Y (WIN_HEIGHT / 2)
 
 typedef struct s_texture
 {
@@ -195,5 +200,9 @@ int				key_hook(int keycode, t_game *game);
 void			move_player(t_game *game);
 int				loop_hook(t_game *game);
 int				key_release(int keycode, t_game *game);
+
+//mouse.c
+void    center_mouse(t_game *game);
+int    handle_mouse(int x, int y, t_game *game);
 
 #endif
