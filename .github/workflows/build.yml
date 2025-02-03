@@ -33,7 +33,7 @@ jobs:
     - name: Build bonus project
       run: make bonus
 
-    - name: Clean project
+    - name: Clean object files
       run: make clean
 
     - name: Check compilation artifacts
@@ -42,10 +42,24 @@ jobs:
           echo "cub3D executable not found!"
           exit 1
         fi
+        if [ ! -f "cub3D_bonus" ]; then
+          echo "cub3D_bonus executable not found!"
+          exit 1
+        fi
         
-    - name: Test executable
+    - name: Test executables
       run: |
-        # Test if executable is properly built and linked
+        # Test if executables are properly built and linked
         ldd ./cub3D
-        # Test if executable has correct permissions
+        ldd ./cub3D_bonus
+        # Test if executables have correct permissions
         test -x ./cub3D
+        test -x ./cub3D_bonus
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: cub3D-executables
+        path: |
+          cub3D
+          cub3D_bonus
