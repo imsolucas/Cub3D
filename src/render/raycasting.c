@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 15:07:52 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/01/23 14:14:03 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/02/03 13:08:24 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,16 +136,16 @@ void	calc_line_height(t_ray *ray, t_player *player)
 		ray->perp_wall_dist = (ray->side_dist_x - ray->delta_dist_x);
 	else
 		ray->perp_wall_dist = (ray->side_dist_y - ray->delta_dist_y);
-	ray->line_height = (int)(WIN_HEIGHT / ray->perp_wall_dist);
-	ray->draw_start = -(ray->line_height) / 2 + WIN_HEIGHT / 2;
-	if (ray->draw_start < 0)
-		ray->draw_start = 0;
-	ray->draw_end = ray->line_height / 2 + WIN_HEIGHT / 2;
-	if (ray->draw_end >= WIN_HEIGHT)
-		ray->draw_end = WIN_HEIGHT - 1;
-	if (ray->hit == 0)
+	if (ray->side == 0)
 		ray->wall_x = player->y + ray->perp_wall_dist * ray->dir_y;
 	else
 		ray->wall_x = player->x + ray->perp_wall_dist * ray->dir_x;
 	ray->wall_x -= floor(ray->wall_x);
+	ray->line_height = (int)(WIN_HEIGHT / ray->perp_wall_dist);
+	ray->draw_start = (WIN_HEIGHT/ 2.0) - (ray->line_height / 2);
+	if (ray->draw_start < 0)
+		ray->draw_start = 0;
+	ray->draw_end = (WIN_HEIGHT / 2.0) + (ray->line_height / 2);
+	if (ray->draw_end >= WIN_HEIGHT)
+		ray->draw_end = WIN_HEIGHT - 1;
 }

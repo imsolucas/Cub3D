@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 11:21:56 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/02/03 10:59:23 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/02/03 13:03:23 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ void	draw_floor_ceiling(t_game *game)
 
 void	set_texture(t_game *game, t_ray *ray)
 {
-	ray->tex_x = (int)(ray->wall_x * TEXTURE_WIDTH);
+	ray->tex_x = (int)(ray->wall_x * game->north.width);
 	if (ray->side == 0 && ray->dir_x < 0)
-		ray->tex_x = TEXTURE_WIDTH - ray->tex_x - 1;
+		ray->tex_x = game->north.width - ray->tex_x - 1;
 	if (ray->side == 1 && ray->dir_y > 0)
-		ray->tex_x = TEXTURE_WIDTH - ray->tex_x - 1;
+		ray->tex_x = game->north.width  - ray->tex_x - 1;
 	if (ray->side == 0)
 	{
 		if (ray->dir_x > 0)
@@ -63,6 +63,11 @@ void	set_texture(t_game *game, t_ray *ray)
 		else
 			ray->current_texture = &game->south;
 	}
+	if (ray->current_texture == NULL)
+    {
+        printf("Error: current_texture is NULL in set_texture.\n");
+        return;
+    }
 }
 
 void	draw_line(t_game *game, t_ray *ray, int x)
@@ -73,15 +78,25 @@ void	draw_line(t_game *game, t_ray *ray, int x)
 	int		tex_y;
 
 	set_texture(game, ray);
-	step = 1.0 * TEXTURE_HEIGHT / ray->line_height;
-	tex_pos = (ray->draw_start - WIN_HEIGHT / 2 + ray->line_height / 2) * step;
+	step = (double)TEXTURE_HEIGHT / (double)ray->line_height;
+	tex_pos = (ray->draw_start - WIN_HEIGHT / 2.0 + ray->line_height / 2.0) * step;
 	y = ray->draw_start;
 	while (y <= ray->draw_end)
 	{
-		tex_y = (int)tex_pos & (TEXTURE_HEIGHT - 1);
+		tex_y = (int)tex_pos & (game->north.height - 1);
+		int tex_x = ray->tex_x % game->north.width;
+		if (tex_y < 0 || tex_y >= game->north.height || tex_x < 0 || tex_x >= game->north.width)
+        {
+            tex_y = 0;
+            tex_x = 0;
+        }
+		unsigned int *texture_data = (unsigned int *)ray->current_texture->addr;
+        unsigned int color = texture_data[tex_y * game->north.width + tex_x];
+        unsigned int *image_addr = (unsigned int *)game->addr; 
+        image_addr[y * WIN_WIDTH + x] = color;
+		// put_pixel(game, x, y, get_texture_color(ray->current_texture,
+		// 	ray->tex_x, tex_y));
 		tex_pos += step;
-		put_pixel(game, x, y, get_texture_color(ray->current_texture,
-			ray->tex_x, tex_y));
 		y++;
 	}
 }
