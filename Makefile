@@ -1,5 +1,5 @@
 NAME		= cub3D
-BONUS_NAME	= cub3D
+BONUS_NAME	= cub3D_bonus
 CC			= cc
 CFLAGS		= -Wall -Wextra -Werror -I./includes -I./lib/libft -I./lib/ft_printf -I./lib/mlx_linux -g3 -fsanitize=address
 RM			= rm -f
@@ -44,7 +44,7 @@ BONUS_FILES	= main_bonus.c \
 			  $(addprefix $(UTILS_DIR), utils.c utils2.c error.c) \
 			  $(addprefix $(DEBUG_DIR), debug.c) \
 			  $(addprefix $(INIT_DIR), init_game.c init_elements.c init_struct.c) \
-			  $(addprefix $(RENDER_DIR), raycasting.c render.c render_utils.c) \
+			  $(addprefix $(RENDER_DIR), raycasting.c render.c render_utils.c minimap.c minimap_utils.c) \
 			  $(addprefix $(MOVEMENT_DIR), direction.c rotation.c events.c mouse.c) \
 
 SRCS		= $(addprefix $(SRC_DIR), $(SRC_FILES))
