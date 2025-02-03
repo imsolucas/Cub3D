@@ -25,8 +25,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define WIN_WIDTH 800
-# define WIN_HEIGHT 600
+# define WIN_WIDTH 1800
+# define WIN_HEIGHT 900
 # define TEXTURE_WIDTH 128
 # define TEXTURE_HEIGHT 128
 # define FRAME_DELAY 200
