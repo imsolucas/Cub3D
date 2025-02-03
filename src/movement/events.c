@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:51:27 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/01/23 16:06:14 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/01/27 15:12:41 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int	key_hook(int keycode, t_game *game)
 		game->player.rotate_left = true;
 	else if (keycode == RIGHT)
 		game->player.rotate_right = true;
+	else if (keycode == SHIFT)
+		game->player.sprint = true;
 	return (0);
 }
 
@@ -58,6 +60,9 @@ int	key_release(int keycode, t_game *game)
 		game->player.rotate_left = false;
 	else if (keycode == RIGHT)
 		game->player.rotate_right = false;
+	else if (keycode == SHIFT)
+		game->player.sprint = false;
+	// printf("Key pressed: %d\n", keycode);
 	return (0);
 }
 
