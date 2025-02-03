@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 15:29:17 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/02/03 16:37:15 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/02/04 07:46:47 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,15 @@ void						calc_line_height(t_ray *ray, t_player *player);
 
 // render.c
 int							render_frame(t_game *game);
+
+// draw.c
 void						draw_floor_ceiling(t_game *game);
+void						draw_line(t_game *game, t_ray *ray, int x);
 void						set_texture(t_game *game, t_ray *ray);
 void						draw_texture(t_game *game, int x, int y,
 								int tex_pos);
-void						draw_line(t_game *game, t_ray *ray, int x);
 
-// render_utils.c
+// draw_utils.c
 int							rgb_to_hex(t_color color);
 void						put_pixel(t_game *game, int x, int y, int color);
 int							get_texture_color(t_texture *texture, int x, int y);

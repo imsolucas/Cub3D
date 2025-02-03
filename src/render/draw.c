@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 11:21:56 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/02/03 16:45:29 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/02/04 07:40:29 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,25 @@ void	draw_floor_ceiling(t_game *game)
 				put_pixel(game, x, y, rgb_to_hex(game->floor));
 			x++;
 		}
+		y++;
+	}
+}
+
+void	draw_line(t_game *game, t_ray *ray, int x)
+{
+	int		y;
+	double	step;
+	double	tex_pos;
+
+	set_texture(game, ray);
+	step = (double)TEXTURE_HEIGHT / (double)ray->line_height;
+	tex_pos = (ray->draw_start - WIN_HEIGHT / 2.0 + ray->line_height / 2.0)
+		* step;
+	y = ray->draw_start;
+	while (y <= ray->draw_end)
+	{
+		draw_texture(game, x, y, tex_pos);
+		tex_pos += step;
 		y++;
 	}
 }
@@ -74,24 +93,5 @@ void	draw_texture(t_game *game, int x, int y, int tex_pos)
 		image_addr = (unsigned int *)game->addr;
 		if (y >= 0 && y < WIN_HEIGHT && x >= 0 && x < WIN_WIDTH)
 			image_addr[y * WIN_WIDTH + x] = color;
-	}
-}
-
-void	draw_line(t_game *game, t_ray *ray, int x)
-{
-	int		y;
-	double	step;
-	double	tex_pos;
-
-	set_texture(game, ray);
-	step = (double)TEXTURE_HEIGHT / (double)ray->line_height;
-	tex_pos = (ray->draw_start - WIN_HEIGHT / 2.0 + ray->line_height / 2.0)
-		* step;
-	y = ray->draw_start;
-	while (y <= ray->draw_end)
-	{
-		draw_texture(game, x, y, tex_pos);
-		tex_pos += step;
-		y++;
 	}
 }
