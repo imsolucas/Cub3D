@@ -33,7 +33,7 @@ jobs:
     - name: Build bonus project
       run: make bonus
 
-    - name: Clean object files
+    - name: Clean project
       run: make clean
 
     - name: Check compilation artifacts
@@ -55,11 +55,3 @@ jobs:
         # Test if executables have correct permissions
         test -x ./cub3D
         test -x ./cub3D_bonus
-
-    - name: Upload artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: cub3D-executables
-        path: |
-          cub3D
-          cub3D_bonus
