@@ -1,4 +1,5 @@
 NAME		= cub3D
+BONUS_NAME	= cub3D
 CC			= cc
 CFLAGS		= -Wall -Wextra -Werror -I./includes -I./lib/libft -I./lib/ft_printf -I./lib/mlx_linux -g3 -fsanitize=address
 RM			= rm -f
@@ -7,6 +8,7 @@ MK			= mkdir -p
 # Directories
 SRC_DIR		= src/
 OBJ_DIR		= obj/
+BONUS_OBJ_DIR	= obj_bonus/
 INC_DIR		= includes/
 LIB_DIR		= lib/
 
@@ -33,10 +35,22 @@ SRC_FILES	= main.c \
 			  $(addprefix $(DEBUG_DIR), debug.c) \
 			  $(addprefix $(INIT_DIR), init_game.c init_elements.c init_struct.c) \
 			  $(addprefix $(RENDER_DIR), raycasting.c render.c render_utils.c) \
+			  $(addprefix $(MOVEMENT_DIR), direction.c rotation.c events.c) \
+
+# Bonus source files (includes mouse.c and uses main_bonus.c instead of main.c)
+BONUS_FILES	= main_bonus.c \
+			  $(addprefix $(PARSE_DIR), parse.c ft_split_whitespace.c parse_map.c parse_utils.c validate_map.c validate_map_utils.c) \
+			  $(addprefix $(GNL_DIR), get_next_line.c) \
+			  $(addprefix $(UTILS_DIR), utils.c utils2.c error.c) \
+			  $(addprefix $(DEBUG_DIR), debug.c) \
+			  $(addprefix $(INIT_DIR), init_game.c init_elements.c init_struct.c) \
+			  $(addprefix $(RENDER_DIR), raycasting.c render.c render_utils.c) \
 			  $(addprefix $(MOVEMENT_DIR), direction.c rotation.c events.c mouse.c) \
 
 SRCS		= $(addprefix $(SRC_DIR), $(SRC_FILES))
+BONUS_SRCS	= $(addprefix $(SRC_DIR), $(BONUS_FILES))
 OBJS		= $(addprefix $(OBJ_DIR), $(SRC_FILES:.c=.o))
+BONUS_OBJS	= $(addprefix $(BONUS_OBJ_DIR), $(BONUS_FILES:.c=.o))
 
 # Colors and formatting
 GREEN		= \033[0;32m
@@ -59,7 +73,16 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@$(CC) $(CFLAGS) -Imlx_linux -O3 -c $< -o $@
 	@printf "$(GREEN) ✓$(RESET)\n"
 
+$(BONUS_OBJ_DIR)%.o: $(SRC_DIR)%.c
+	@$(MK) $(dir $@)
+	@$(eval CURR_FILE=$(shell echo $$(($(CURR_FILE) + 1))))
+	@printf "$(CLEAR)$(BLUE)➜ $(PURPLE)Compiling bonus $(CYAN)%d/%d $(BLUE)%s$(RESET)" $(CURR_FILE) $(TOTAL_FILES) $<
+	@$(CC) $(CFLAGS) -Imlx_linux -O3 -c $< -o $@
+	@printf "$(GREEN) ✓$(RESET)\n"
+
 all: logo libs $(NAME)
+
+bonus: logo libs $(BONUS_NAME)
 
 logo:
 	@printf "$(CYAN)$$LOGO$(RESET)\n"
@@ -80,24 +103,33 @@ $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) -lX11 -lXext -lm -o $(NAME)
 	@printf "$(GREEN)$(BOLD)✨ Build successful! '$(NAME)' is ready.$(RESET)\n"
 
+$(BONUS_NAME): $(BONUS_OBJS)
+	@printf "$(BLUE)Linking bonus files"
+	@for i in 1 2 3; do \
+		printf "." && sleep 0.2; \
+	done
+	@printf "\n"
+	@$(CC) $(CFLAGS) $(BONUS_OBJS) $(LIBS) -lX11 -lXext -lm -o $(BONUS_NAME)
+	@printf "$(GREEN)$(BOLD)✨ Build successful! '$(BONUS_NAME)' is ready.$(RESET)\n"
+
 clean:
-	@$(RM) -r $(OBJ_DIR)
+	@$(RM) -r $(OBJ_DIR) $(BONUS_OBJ_DIR)
 	@make --no-print-directory -C $(LIB_DIR)libft clean >/dev/null
 	@make --no-print-directory -C $(LIB_DIR)ft_printf clean >/dev/null
 	@make --no-print-directory -C $(LIB_DIR)mlx_linux clean >/dev/null
 	@printf "$(BLUE)🧹 Cleaned object files$(RESET)\n"
 
 fclean: clean
-	@$(RM) $(NAME)
+	@$(RM) $(NAME) $(BONUS_NAME)
 	@make --no-print-directory -C $(LIB_DIR)libft fclean >/dev/null
 	@make --no-print-directory -C $(LIB_DIR)ft_printf fclean >/dev/null
-	@printf "$(BLUE)🗑️  Cleaned binary file$(RESET)\n"
+	@printf "$(BLUE)🗑️  Cleaned binary files$(RESET)\n"
 	@sleep 0.5
 	@clear
 
 re: fclean all
 
-bonus: all
+re_bonus: fclean bonus
 
 # Define the ASCII art logo
 define LOGO
@@ -112,4 +144,4 @@ define LOGO
 endef
 export LOGO
 
-.PHONY: all clean fclean re bonus logo libs
+.PHONY: all clean fclean re bonus re_bonus logo libs
