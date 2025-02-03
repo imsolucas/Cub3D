@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 11:21:56 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/02/03 13:03:23 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/02/03 13:13:17 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,15 +85,15 @@ void	draw_line(t_game *game, t_ray *ray, int x)
 	{
 		tex_y = (int)tex_pos & (game->north.height - 1);
 		int tex_x = ray->tex_x % game->north.width;
-		if (tex_y < 0 || tex_y >= game->north.height || tex_x < 0 || tex_x >= game->north.width)
+		if (tex_y >= 0 && tex_y < ray->current_texture->height && 
+            tex_x >= 0 && tex_x < ray->current_texture->width)
         {
-            tex_y = 0;
-            tex_x = 0;
+            unsigned int *texture_data = (unsigned int *)ray->current_texture->addr;
+            unsigned int color = texture_data[tex_y * ray->current_texture->width + tex_x];
+            unsigned int *image_addr = (unsigned int *)game->addr;
+            if (y >= 0 && y < WIN_HEIGHT && x >= 0 && x < WIN_WIDTH)
+                image_addr[y * WIN_WIDTH + x] = color;
         }
-		unsigned int *texture_data = (unsigned int *)ray->current_texture->addr;
-        unsigned int color = texture_data[tex_y * game->north.width + tex_x];
-        unsigned int *image_addr = (unsigned int *)game->addr; 
-        image_addr[y * WIN_WIDTH + x] = color;
 		// put_pixel(game, x, y, get_texture_color(ray->current_texture,
 		// 	ray->tex_x, tex_y));
 		tex_pos += step;
