@@ -6,131 +6,11 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:22:57 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/01/24 15:19:27 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:12:35 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-#define MINIMAP_SIZE 200
-#define MINIMAP_SCALE 15
-#define MINIMAP_BORDER_COLOR 0xFFFFFF
-#define MINIMAP_BACKGROUND_COLOR 0x000000
-
-void	draw_rect(t_game *game, int x, int y, int width, int height, int color)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	while (++i < width)
-	{
-		j = -1;
-		while (++j < height)
-		{
-			put_pixel(game, x + i, y + j, color);
-		}
-	}
-}
-
-void	draw_circle(t_game *game, int x, int y, int radius, int color)
-{
-	int	i;
-	int	j;
-
-	i = -radius;
-	while (i <= radius)
-	{
-		j = -radius;
-		while (j <= radius)
-		{
-			if (i * i + j * j <= radius * radius)
-				put_pixel(game, x + i, y + j, color);
-			j++;
-		}
-		i++;
-	}
-}
-
-void	draw_line_minimap(t_game *game, int x0, int y0, int x1, int y1,
-		int color)
-{
-	int	dx;
-	int	dy;
-	int	sx;
-	int	sy;
-	int	err;
-	int	e2;
-
-	dx = abs(x1 - x0);
-	dy = abs(y1 - y0);
-	if (x0 < x1)
-		sx = 1;
-	else
-		sx = -1;
-	if (y0 < y1)
-		sy = 1;
-	else
-		sy = -1;
-	err = dx - dy;
-	while (1)
-	{
-		put_pixel(game, x0, y0, color);
-		if (x0 == x1 && y0 == y1)
-			break ;
-		e2 = 2 * err;
-		if (e2 > -dy)
-		{
-			err -= dy;
-			x0 += sx;
-		}
-		if (e2 < dx)
-		{
-			err += dx;
-			y0 += sy;
-		}
-	}
-}
-
-void	draw_minimap_grid(t_game *game)
-{
-	int	x;
-	int	y;
-	int	cell_size;
-	int	color;
-
-	cell_size = MINIMAP_SIZE / game->map.width;
-	y = -1;
-	while (++y < game->map.height)
-	{
-		x = -1;
-		while (++x < game->map.width)
-		{
-			if (game->map.map[y][x] == '1')
-				color = 0x444444;
-			else
-				color = 0x888888;
-			draw_rect(game, x * cell_size, y * cell_size, cell_size, cell_size,
-				color);
-		}
-	}
-}
-
-void	draw_square(t_game *game, int x, int y, int size, int color)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	while (++i < size)
-	{
-		j = -1;
-		while (++j < size)
-		{
-			put_pixel(game, x + i, y + j, color);
-		}
-	}
-}
 
 void	draw_minimap_border(t_game *game)
 {
@@ -164,40 +44,17 @@ void	draw_minimap_border(t_game *game)
 
 void	draw_minimap(t_game *game)
 {
-	int		x;
-	int		y;
-	double	ray_x;
-	double	ray_y;
-	double	ray_dir_x;
-	double	ray_dir_y;
-	int		map_x;
-	int		map_y;
-	int		player_square_size;
-	int		player_draw_x;
-	int		player_draw_y;
+	int map_x;
+	int map_y;
+	double ray_x;
+	double ray_y;
+	double ray_dir_x;
+	double ray_dir_y;
 
 	draw_minimap_border(game);
-	y = -1;
-	while (++y < game->map.height)
-	{
-		x = -1;
-		while (++x < game->map.width)
-		{
-			if (game->map.map[y][x] == '1')
-				draw_square(game, x * MINIMAP_SCALE + 2, y * MINIMAP_SCALE + 2,
-					MINIMAP_SCALE, 0x333333);
-			else if (game->map.map[y][x] == '0')
-				draw_square(game, x * MINIMAP_SCALE + 2, y * MINIMAP_SCALE + 2,
-					MINIMAP_SCALE, 0x666666);
-		}
-	}
-	player_square_size = MINIMAP_SCALE;
-	player_draw_x = (int)((game->player.x * MINIMAP_SCALE) + 2
-			- (player_square_size / 2));
-	player_draw_y = (int)((game->player.y * MINIMAP_SCALE) + 2
-			- (player_square_size / 2));
-	draw_square(game, player_draw_x, player_draw_y, player_square_size,
-		0xFFFF00);
+	draw_minimap_floor(game);
+	draw_minimap_player(game);
+	//init_minimap(game, mini);
 	ray_x = game->player.x;
 	ray_y = game->player.y;
 	ray_dir_x = game->player.dir_x;
