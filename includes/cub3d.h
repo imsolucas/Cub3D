@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
+/*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:54:46 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/02/03 15:23:00 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/02/03 16:37:27 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@
 # define D 100
 
 // Mouse settings
-# define MOUSE_SENSITIVITY 0.00002
+# define MOUSE_SENSITIVITY 0.0002
 # define MOUSE_CENTER_X (WIN_WIDTH / 2)
 # define MOUSE_CENTER_Y (WIN_HEIGHT / 2)
 
@@ -201,8 +201,8 @@ void			move_player(t_game *game);
 int				loop_hook(t_game *game);
 int				key_release(int keycode, t_game *game);
 
-//mouse.c
-void    center_mouse(t_game *game);
-int    handle_mouse(int x, int y, t_game *game);
+// mouse.c
+void			center_mouse(t_game *game);
+int				handle_mouse(int x, int y, t_game *game);
 
 #endif
