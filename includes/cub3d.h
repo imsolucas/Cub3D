@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:54:46 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/02/03 16:37:27 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/02/04 17:34:10 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,9 @@
 
 // Mouse settings
 # define MOUSE_SENSITIVITY 0.0002
-# define MOUSE_CENTER_X (WIN_WIDTH / 2)
-# define MOUSE_CENTER_Y (WIN_HEIGHT / 2)
+# define MOUSE_SENSITIVITY 0.0002
+# define MOUSE_CENTER_X 900    // Pre-calculated value of WIN_WIDTH / 2 (1800/2)
+# define MOUSE_CENTER_Y 450    // Pre-calculated value of WIN_HEIGHT / 2 (900/2)
 
 typedef struct s_texture
 {
@@ -138,6 +139,7 @@ int				key_hook(int keycode, t_game *game);
 void			error_exit(char *message);
 void			free_map(t_game *game);
 int				cleanup(t_game *game);
+void			free_temp_map(char **map, int height);
 
 // parse.c
 void			parse(char *file, t_game *game);
@@ -151,6 +153,17 @@ bool			parse_color(char **split, t_game *game);
 // parse_map.c
 bool			parse_map(char *line, t_game *game);
 bool			validate_map(t_game *game);
+
+// parse.c
+bool			process_line(char *line, t_game *game, int fd);
+void			parse(char *file, t_game *game);
+
+// parse_validate.c
+bool			validate_textures(t_game *game);
+bool			validate_element_order(int current_type, bool map_started);
+
+// parse_process.c
+bool			parse_file(char *file, t_game *game);
 
 // get_next_line.c
 char			*get_next_line(int fd);
@@ -179,6 +192,10 @@ void			debug(t_game *game);
 
 // validate_map.c
 bool			validate_map_closed(t_game *game);
+
+// validate_map_flood.c
+bool			find_player(t_game *game);
+void			flood_fill_map(char **map, t_point start, t_point size);
 
 // validate_map_utils.c
 char			**duplicate_map(t_game *game);
