@@ -6,7 +6,7 @@
 /*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:54:46 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/02/04 17:32:10 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/02/04 17:34:10 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,8 +218,8 @@ void			move_player(t_game *game);
 int				loop_hook(t_game *game);
 int				key_release(int keycode, t_game *game);
 
-//mouse.c
-void    center_mouse(t_game *game);
-int    handle_mouse(int x, int y, t_game *game);
+// mouse.c
+void			center_mouse(t_game *game);
+int				handle_mouse(int x, int y, t_game *game);
 
 #endif
