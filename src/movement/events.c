@@ -6,7 +6,7 @@
 /*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:51:27 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/01/27 15:12:41 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/02/04 17:28:53 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ int	key_release(int keycode, t_game *game)
 		game->player.rotate_right = false;
 	else if (keycode == SHIFT)
 		game->player.sprint = false;
-	// printf("Key pressed: %d\n", keycode);
 	return (0);
 }
 

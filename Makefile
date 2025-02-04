@@ -29,7 +29,7 @@ LIBS		= $(MLX) $(LIBFT) $(PRINTF)
 
 # Source files
 SRC_FILES	= main.c \
-			  $(addprefix $(PARSE_DIR), parse.c ft_split_whitespace.c parse_map.c parse_utils.c validate_map.c validate_map_utils.c) \
+			  $(addprefix $(PARSE_DIR), parse.c parse_validate.c parse_process.c ft_split_whitespace.c parse_map.c parse_utils.c parse_utils2.c validate_map.c validate_map_flood.c validate_map_utils.c) \
 			  $(addprefix $(GNL_DIR), get_next_line.c) \
 			  $(addprefix $(UTILS_DIR), utils.c utils2.c error.c) \
 			  $(addprefix $(DEBUG_DIR), debug.c) \
@@ -39,7 +39,7 @@ SRC_FILES	= main.c \
 
 # Bonus source files (includes mouse.c and uses main_bonus.c instead of main.c)
 BONUS_FILES	= main_bonus.c \
-			  $(addprefix $(PARSE_DIR), parse.c ft_split_whitespace.c parse_map.c parse_utils.c validate_map.c validate_map_utils.c) \
+			  $(addprefix $(PARSE_DIR), parse.c parse_validate.c parse_process.c ft_split_whitespace.c parse_map.c parse_utils.c parse_utils2.c validate_map.c validate_map_flood.c validate_map_utils.c) \
 			  $(addprefix $(GNL_DIR), get_next_line.c) \
 			  $(addprefix $(UTILS_DIR), utils.c utils2.c error.c) \
 			  $(addprefix $(DEBUG_DIR), debug.c) \
