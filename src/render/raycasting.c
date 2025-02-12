@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 15:07:52 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/02/03 14:08:02 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/02/12 10:39:07 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,11 @@ void	start_dda(t_game *game, t_ray *ray)
 		if (ray->map_x < 0 || ray->map_x >= game->map.width || ray->map_y < 0
 			|| ray->map_y >= game->map.height)
 			break ;
-		else if (game->map.map[ray->map_y][ray->map_x] == '1')
+		else if (game->map.map[ray->map_y][ray->map_x] == '1' || game->map.map[ray->map_y][ray->map_x] == 'D')
+		{
+			// printf("Ray hit (%d, %d), type: %c\n", ray->map_x, ray->map_y, game->map.map[ray->map_y][ray->map_x]);
 			ray->hit = 1;
+		}
 	}
 }
 

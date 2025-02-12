@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils2.c                                           :+:      :+:    :+:   */
+/*   utils2_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/21 13:58:05 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/02/12 09:39:51 by abinti-a         ###   ########.fr       */
+/*   Created: 2025/02/12 09:40:09 by abinti-a          #+#    #+#             */
+/*   Updated: 2025/02/12 09:40:28 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static bool	is_valid_map_line(char *line)
 {
 	while (*line && *line != '\n')
 	{
-		if (!ft_strchr(" 01NSEW", *line))
+		if (!ft_strchr(" 01NSEWD", *line))
 			return (false);
 		line++;
 	}

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   draw_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/20 11:21:56 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/02/12 08:51:42 by abinti-a         ###   ########.fr       */
+/*   Created: 2025/02/12 08:51:57 by abinti-a          #+#    #+#             */
+/*   Updated: 2025/02/12 10:40:13 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,18 @@ void	set_texture(t_game *game, t_ray *ray)
 		ray->tex_x = TEXTURE_WIDTH - ray->tex_x - 1;
 	if (ray->side == 1 && ray->dir_y > 0)
 		ray->tex_x = TEXTURE_WIDTH - ray->tex_x - 1;
+    if (game->map.map[ray->map_y][ray->map_x] == 'D')
+    {
+        int i = -1;
+        while (++i < game->map.door_count)
+        {
+            if (game->map.doors[i].x == ray->map_x && game->map.doors[i].y == ray->map_y)
+            {
+                ray->current_texture = game->map.doors[i].is_open ? &game->door_open : &game->door_close;
+                return;
+            }
+        }
+    }
 	if (ray->side == 0)
 	{
 		if (ray->dir_x > 0)
@@ -73,6 +85,9 @@ void	set_texture(t_game *game, t_ray *ray)
 		else
 			ray->current_texture = &game->south;
 	}
+    // printf("Ray hit (%d, %d), type: %c\n", ray->map_x, ray->map_y, game->map.map[ray->map_y][ray->map_x]);
+    // printf("Map at (4,0): %c\n", game->map.map[0][4]);
+    // printf("Ray hit (%d, %d), type: %c\n", ray->map_x, ray->map_y, game->map.map[ray->map_y][ray->map_x]);
 }
 
 void	draw_texture(t_game *game, int x, int y, int tex_pos)

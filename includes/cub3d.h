@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
+/*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:54:46 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/02/04 17:34:10 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/02/12 08:54:52 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@
 // Mouse settings
 # define MOUSE_SENSITIVITY 0.0002
 # define MOUSE_SENSITIVITY 0.0002
-# define MOUSE_CENTER_X 900    // Pre-calculated value of WIN_WIDTH / 2 (1800/2)
-# define MOUSE_CENTER_Y 450    // Pre-calculated value of WIN_HEIGHT / 2 (900/2)
+# define MOUSE_CENTER_X 900 // Pre-calculated value of WIN_WIDTH / 2 (1800/2)
+# define MOUSE_CENTER_Y 450 // Pre-calculated value of WIN_HEIGHT / 2 (900/2)
 
 typedef struct s_texture
 {
@@ -65,11 +65,20 @@ typedef struct s_texture
 	int			height;
 }				t_texture;
 
+typedef struct s_door
+{
+	int			x;
+	int			y;
+	int			is_open;
+}				t_door;
+
 typedef struct s_map
 {
 	char		**map;
 	int			width;
 	int			height;
+	int			door_count;
+	t_door		*doors;
 }				t_map;
 
 typedef struct s_player
@@ -111,6 +120,8 @@ typedef struct s_game
 	t_texture	south;
 	t_texture	east;
 	t_texture	west;
+	t_texture	door_open;
+	t_texture	door_close;
 	t_color		floor;
 	t_color		ceiling;
 	t_player	player;

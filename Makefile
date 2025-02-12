@@ -20,6 +20,7 @@ DEBUG_DIR = debug/
 INIT_DIR = init/
 RENDER_DIR = render/
 MOVEMENT_DIR = movement/
+DOOR_DIR = door/
 
 # Libraries
 LIBFT		= $(LIB_DIR)libft/libft.a
@@ -39,13 +40,14 @@ SRC_FILES	= main.c \
 
 # Bonus source files (includes mouse.c and uses main_bonus.c instead of main.c)
 BONUS_FILES	= main_bonus.c \
-			  $(addprefix $(PARSE_DIR), parse.c parse_validate.c parse_process.c ft_split_whitespace.c parse_map.c parse_utils.c parse_utils2.c validate_map.c validate_map_flood.c validate_map_utils.c) \
+			  $(addprefix $(PARSE_DIR), parse.c parse_validate.c parse_process.c ft_split_whitespace.c parse_utils.c parse_utils2.c validate_map_flood.c validate_map_utils.c) \
 			  $(addprefix $(GNL_DIR), get_next_line.c) \
-			  $(addprefix $(UTILS_DIR), utils.c utils2.c error.c) \
+			  $(addprefix $(UTILS_DIR), utils.c error.c) \
 			  $(addprefix $(DEBUG_DIR), debug.c) \
-			  $(addprefix $(INIT_DIR), init_game.c init_elements.c init_struct.c) \
-			  $(addprefix $(RENDER_DIR), raycasting.c draw.c draw_utils.c minimap.c minimap_utils.c) \
+			  $(addprefix $(INIT_DIR), init_elements.c init_struct.c) \
+			  $(addprefix $(RENDER_DIR), raycasting.c draw_utils.c minimap.c minimap_utils.c) \
 			  $(addprefix $(MOVEMENT_DIR), direction.c rotation.c events.c mouse.c) \
+			  $(addprefix $(DOOR_DIR), handle_door.c draw_bonus.c parse_map_bonus.c validate_map_bonus.c utils2_bonus.c init_game_bonus.c) \
 
 SRCS		= $(addprefix $(SRC_DIR), $(SRC_FILES))
 BONUS_SRCS	= $(addprefix $(SRC_DIR), $(BONUS_FILES))
