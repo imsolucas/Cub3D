@@ -6,7 +6,7 @@
 /*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:20:38 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/02/04 16:42:33 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/02/12 13:30:42 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ bool	validate_fill(char **map, t_point size)
 			if (c != '1' && c != 'V' && c != '0'
 				&& c != ' ' && !ft_strchr("NSEW", c))
 			{
-				printf("Error\nInvalid map hi\n");
+				ft_putstr_fd("Error\nInvalid map: Contains invalid character or map is not properly closed\n", 2);
 				return (false);
 			}
 			j++;
@@ -45,13 +45,17 @@ char	**duplicate_map(t_game *game)
 
 	dup = malloc(sizeof(char *) * game->map.height);
 	if (!dup)
+	{
+		ft_putstr_fd("Error\nMemory allocation failed during map validation\n", 2);
 		return (NULL);
+	}
 	i = 0;
 	while (i < game->map.height)
 	{
 		dup[i] = ft_strdup(game->map.map[i]);
 		if (!dup[i])
 		{
+			ft_putstr_fd("Error\nMemory allocation failed during map validation\n", 2);
 			while (--i >= 0)
 				free(dup[i]);
 			free(dup);
