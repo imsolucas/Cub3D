@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils2.c                                           :+:      :+:    :+:   */
+/*   utils2_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:58:05 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/02/12 13:20:49 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/02/12 13:24:15 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static bool	is_valid_map_line(char *line)
 	i = 0;
 	while (line[i] && line[i] != '\n')
 	{
-		if (!ft_strchr(" 01NSEW", line[i]))
+		if (!ft_strchr(" 01NSEWD", line[i]))
 		{
 			ft_putstr_fd("Error\nInvalid character '", 2);
 			ft_putchar_fd(line[i], 2);

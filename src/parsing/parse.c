@@ -6,7 +6,7 @@
 /*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 13:12:42 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/02/04 17:18:51 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/02/12 13:39:15 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ bool	process_line(char *line, t_game *game, int fd)
 	if (is_empty_line(line))
 	{
 		free(line);
-		return (true);
+		return (false);
 	}
 	element = element_type(line);
 	if (!handle_element(line, game, fd, element))

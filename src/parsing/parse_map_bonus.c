@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_map.c                                        :+:      :+:    :+:   */
+/*   parse_map_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:47:18 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/02/12 13:26:02 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/02/12 13:28:02 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_max(int a, int b)
 static bool	is_valid_map_char(char c)
 {
 	return (c == '0' || c == '1' || c == 'N' || c == 'S'
-		|| c == 'E' || c == 'W' || c == ' ' || c == '\n');
+		|| c == 'E' || c == 'W' || c == ' ' || c == '\n' || c == 'D');
 }
 
 static bool	validate_map_chars(char *line)
