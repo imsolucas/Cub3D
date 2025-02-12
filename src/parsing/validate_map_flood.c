@@ -6,7 +6,7 @@
 /*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:50:38 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/02/04 16:38:13 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/02/12 15:08:16 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ bool	find_player(t_game *game)
 			if (ft_strchr("NSEW", game->map.map[i][j]))
 			{
 				if (player_found)
+				{
+					ft_putstr_fd("Error\nMultiple players found in map\n", 2);
 					return (false);
+				}
 				game->player.x = j + 0.5;
 				game->player.y = i + 0.5;
 				game->player.direction = game->map.map[i][j];

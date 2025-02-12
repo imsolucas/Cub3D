@@ -6,7 +6,7 @@
 /*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:54:46 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/02/04 17:34:10 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/02/12 14:04:01 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define WIN_WIDTH 1800
-# define WIN_HEIGHT 900
+# define WIN_WIDTH 600
+# define WIN_HEIGHT 480
 # define TEXTURE_WIDTH 128
 # define TEXTURE_HEIGHT 128
 # define FRAME_DELAY 200
