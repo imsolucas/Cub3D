@@ -6,7 +6,7 @@
 /*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:23:31 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/02/12 15:14:02 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/02/12 15:25:30 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ bool	parse_element(char *line, t_game *game, int element_type)
 		return (false);
 	if (element_type == TYPE_COLOR)
 	{
-		if (!game->north.path || !game->south.path ||
-			!game->west.path || !game->east.path)
+		if (!game->north.path || !game->south.path
+			|| !game->west.path || !game->east.path)
 		{
 			free_split(split);
 			return (false);

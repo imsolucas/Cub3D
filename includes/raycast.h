@@ -3,27 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 15:29:17 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/02/04 07:46:47 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/02/12 15:42:25 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RAYCAST_H
 # define RAYCAST_H
 
+/* ************************** */
+/*         INCLUDES          */
+/* ************************** */
 # include "cub3d.h"
 
+/* ************************** */
+/*     MINIMAP SETTINGS      */
+/* ************************** */
 # define MINIMAP_SCALE 15
 # define MINIMAP_BORDER_COLOR 0xFFFFFF
 # define MINIMAP_BACKGROUND_COLOR 0x000000
 
-typedef struct s_player		t_player;
-typedef struct s_color		t_color;
-typedef struct s_game		t_game;
-typedef struct s_texture	t_texture;
+/* ************************** */
+/*   STRUCTURE REFERENCES    */
+/* ************************** */
+typedef struct s_player			t_player;
+typedef struct s_color			t_color;
+typedef struct s_game			t_game;
+typedef struct s_texture		t_texture;
 
+/* ************************** */
+/*      RAY STRUCTURE        */
+/* ************************** */
 typedef struct s_ray
 {
 	double					camera_x;
@@ -48,6 +60,9 @@ typedef struct s_ray
 	t_texture				*current_texture;
 }							t_ray;
 
+/* ************************** */
+/*    MINIMAP STRUCTURE      */
+/* ************************** */
 typedef struct s_mini
 {
 	double					ray_x;
@@ -64,35 +79,36 @@ typedef struct s_mini
 	int						color;
 }							t_mini;
 
-// raycasting.c
+/* ************************** */
+/*       RAYCASTING          */
+/* ************************** */
 int							raycasting(t_game *game, t_ray *ray);
 void						init_raycast(t_ray *ray, t_player *player, int x);
 void						init_dda(t_ray *ray, t_player *player);
 void						start_dda(t_game *game, t_ray *ray);
 void						calc_line_height(t_ray *ray, t_player *player);
 
-// render.c
-int							render_frame(t_game *game);
-
-// draw.c
+/* ************************** */
+/*         DRAWING           */
+/* ************************** */
 void						draw_floor_ceiling(t_game *game);
 void						draw_line(t_game *game, t_ray *ray, int x);
 void						set_texture(t_game *game, t_ray *ray);
 void						draw_texture(t_game *game, int x, int y,
 								int tex_pos);
-
-// draw_utils.c
+int							render_frame(t_game *game);
 int							rgb_to_hex(t_color color);
 void						put_pixel(t_game *game, int x, int y, int color);
-int							get_texture_color(t_texture *texture, int x, int y);
+int							get_texture_color(t_texture *texture, int x,
+								int y);
 
-// minimap.c
+/* ************************** */
+/*         MINIMAP           */
+/* ************************** */
 void						draw_minimap(t_game *game);
 void						draw_minimap_border(t_game *game, t_mini *mini);
 void						draw_minimap_floor(t_game *game);
 void						draw_minimap_player(t_game *game);
-
-// minimap_utils.c
 void						draw_square(t_game *game, t_mini *mini);
 void						init_minimap(t_game *game, t_mini *mini);
 
