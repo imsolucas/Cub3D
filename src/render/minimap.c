@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:22:57 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/02/13 12:49:21 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/02/13 13:19:24 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ void	draw_minimap_floor(t_game *game)
 				mini.color = 0x666666;
 			else if (game->map.map[y][x] == 'D')
 				mini.color = 0x00FF00;
+			else if (game->map.map[y][x] == 'C')
+				mini.color = 0x006600;
 			draw_square(game, &mini);
 		}
 	}

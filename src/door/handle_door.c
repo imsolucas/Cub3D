@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 08:45:31 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/02/13 11:20:11 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/02/13 13:18:20 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	handle_door(t_game *game)
 	{
 		check_player(game, &check, i);
 		tile = game->map.map[check.y][check.x];
-		if (tile == 'D' || tile == '0')
+		if (tile == 'D' || tile == 'C')
 		{
 			j = -1;
 			while (++j < game->map.door_count)
@@ -60,7 +60,7 @@ void	toggle_door(t_game *game, int x, int y)
 		{
 			game->map.doors[i].is_open = !game->map.doors[i].is_open;
 			if (game->map.doors[i].is_open)
-				game->map.map[y][x] = '0';
+				game->map.map[y][x] = 'C';
 			else
 				game->map.map[y][x] = 'D';
 			return ;
