@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
+/*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 15:29:17 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/02/12 15:42:25 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/02/13 11:43:18 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@
 /* ************************** */
 /*   STRUCTURE REFERENCES    */
 /* ************************** */
-typedef struct s_player			t_player;
-typedef struct s_color			t_color;
-typedef struct s_game			t_game;
-typedef struct s_texture		t_texture;
+typedef struct s_player		t_player;
+typedef struct s_color		t_color;
+typedef struct s_game		t_game;
+typedef struct s_texture	t_texture;
 
 /* ************************** */
 /*      RAY STRUCTURE        */
@@ -93,14 +93,14 @@ void						calc_line_height(t_ray *ray, t_player *player);
 /* ************************** */
 void						draw_floor_ceiling(t_game *game);
 void						draw_line(t_game *game, t_ray *ray, int x);
+int							set_door_texture(t_game *game, t_ray *ray);
 void						set_texture(t_game *game, t_ray *ray);
 void						draw_texture(t_game *game, int x, int y,
 								int tex_pos);
 int							render_frame(t_game *game);
 int							rgb_to_hex(t_color color);
 void						put_pixel(t_game *game, int x, int y, int color);
-int							get_texture_color(t_texture *texture, int x,
-								int y);
+int							get_texture_color(t_texture *texture, int x, int y);
 
 /* ************************** */
 /*         MINIMAP           */

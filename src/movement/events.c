@@ -6,12 +6,13 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:51:27 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/02/12 15:46:15 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/02/13 11:03:28 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-void    handle_door(t_game *game);
+
+void	handle_door(t_game *game);
 
 int	loop_hook(t_game *game)
 {

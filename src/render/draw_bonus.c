@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 08:51:57 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/02/13 10:04:51 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/02/13 11:42:30 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,31 +52,39 @@ void	draw_line(t_game *game, t_ray *ray, int x)
 	}
 }
 
-void	set_texture(t_game *game, t_ray *ray)
+int	set_door_texture(t_game *game, t_ray *ray)
 {
 	int	i;
 
+	i = -1;
+	while (++i < game->map.door_count)
+	{
+		if (game->map.doors[i].x == ray->map_x
+			&& game->map.doors[i].y == ray->map_y)
+		{
+			if (game->map.doors[i].is_open)
+				ray->current_texture = &game->door_open;
+			else
+				ray->current_texture = &game->door_close;
+			return (1);
+		}
+	}
+	return (0);
+}
+
+void	set_texture(t_game *game, t_ray *ray)
+{
+	ray->current_texture = NULL;
 	ray->tex_x = (int)(ray->wall_x * TEXTURE_WIDTH);
 	if (ray->side == 0 && ray->dir_x < 0)
 		ray->tex_x = TEXTURE_WIDTH - ray->tex_x - 1;
 	if (ray->side == 1 && ray->dir_y > 0)
 		ray->tex_x = TEXTURE_WIDTH - ray->tex_x - 1;
-	if (game->map.map[ray->map_y][ray->map_x] == 'D')
-	{
-		i = -1;
-		while (++i < game->map.door_count)
-		{
-			if (game->map.doors[i].x == ray->map_x
-				&& game->map.doors[i].y == ray->map_y)
-			{
-				if (game->map.doors[i].is_open)
-					ray->current_texture = &game->door_open;
-				else
-					ray->current_texture = &game->door_close;
-				return ;
-			}
-		}
-	}
+	if (set_door_texture(game, ray))
+		return ;
+	if (ray->current_texture == &game->door_open
+		|| ray->current_texture == &game->door_close)
+		return ;
 	if (ray->side == 0)
 	{
 		if (ray->dir_x > 0)

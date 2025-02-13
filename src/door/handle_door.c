@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 08:45:31 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/02/13 10:05:20 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/02/13 11:20:11 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void	handle_door(t_game *game)
 
 void	check_player(t_game *game, t_check *check, int i)
 {
-	static t_direction	direction[] = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1},
-			{1, -1}, {-1, 1}, {-1, -1}};
+	static t_direction	direction[] = \
+	{{1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}, {1, -1}, {-1, 1}, {-1, -1}};
 
 	check->x = (int)game->player.x + direction[i].dx;
 	check->y = (int)game->player.y + direction[i].dy;

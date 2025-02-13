@@ -6,12 +6,11 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:50:38 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/02/13 10:41:06 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/02/13 11:24:37 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-void	flood_fill_map(char **map, t_point start, t_point size);
 
 static bool	check_space_neighbors(char **map, int i, int j, t_point size)
 {
@@ -47,47 +46,52 @@ static bool	check_boundaries(char **map, t_point size)
 	return (true);
 }
 
-void count_door(t_game *game)
+void	assign_door_index(t_game *game, int x, int y)
 {
-    int x;
-    int y;
-    int door_index;
-    
-    x = 0;
-    game->map.door_count = 0;
-    while (x < game->map.height)
-    {
-        y = 0;
-        while (y < game->map.width)
-        {
-            if (game->map.map[x][y] == 'D')
-                game->map.door_count++;
-            y++;
-        }
-        x++;
-    }
-    game->map.doors = malloc(sizeof(t_door) * game->map.door_count);
-    if (!game->map.doors)
-        return; 
-    x = 0;
-    door_index = 0;
-    
-    while (x < game->map.height)
-    {
-        y = 0;
-        while (y < game->map.width)
-        {
-            if (game->map.map[x][y] == 'D')
-            {
-                game->map.doors[door_index].x = y;
-                game->map.doors[door_index].y = x;
-                game->map.doors[door_index].is_open = 0;
-                door_index++;
-            }
-            y++;
-        }
-        x++;
-    }
+	int	door_index;
+
+	game->map.doors = malloc(sizeof(t_door) * game->map.door_count);
+	if (!game->map.doors)
+		return ;
+	x = 0;
+	door_index = 0;
+	while (x < game->map.height)
+	{
+		y = 0;
+		while (y < game->map.width)
+		{
+			if (game->map.map[x][y] == 'D')
+			{
+				game->map.doors[door_index].x = y;
+				game->map.doors[door_index].y = x;
+				game->map.doors[door_index].is_open = 0;
+				door_index++;
+			}
+			y++;
+		}
+		x++;
+	}
+}
+
+void	count_door(t_game *game)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	game->map.door_count = 0;
+	while (x < game->map.height)
+	{
+		y = 0;
+		while (y < game->map.width)
+		{
+			if (game->map.map[x][y] == 'D')
+				game->map.door_count++;
+			y++;
+		}
+		x++;
+	}
+	assign_door_index(game, x, y);
 }
 
 bool	validate_map_closed(t_game *game)
@@ -101,7 +105,7 @@ bool	validate_map_closed(t_game *game)
 		return (false);
 	if (!find_player(game))
 		return (false);
-    count_door(game);
+	count_door(game);
 	temp_map = duplicate_map(game);
 	if (!temp_map)
 		return (false);
