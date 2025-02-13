@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:54:46 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/02/13 09:57:35 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/02/13 10:45:55 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@
 /* ************************** */
 /*          DEFINES          */
 /* ************************** */
-# define WIN_WIDTH 600
-# define WIN_HEIGHT 480
+# define WIN_WIDTH 1000
+# define WIN_HEIGHT 880
 # define TEXTURE_WIDTH 128
 # define TEXTURE_HEIGHT 128
-# define FRAME_DELAY 200
+# define FRAME_DELAY 500
 
 /* ************************** */
 /*         KEY CODES         */

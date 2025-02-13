@@ -6,11 +6,12 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:50:38 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/02/12 15:43:36 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/02/13 10:41:06 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+void	flood_fill_map(char **map, t_point start, t_point size);
 
 static bool	check_space_neighbors(char **map, int i, int j, t_point size)
 {
