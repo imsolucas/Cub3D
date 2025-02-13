@@ -6,11 +6,17 @@
 /*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:20:38 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/02/04 16:42:33 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/02/12 15:36:20 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static void	print_map_error(void)
+{
+	ft_putstr_fd("Error\nInvalid map: Contains invalid character or ", 2);
+	ft_putstr_fd("map is not properly closed\n", 2);
+}
 
 bool	validate_fill(char **map, t_point size)
 {
@@ -28,7 +34,7 @@ bool	validate_fill(char **map, t_point size)
 			if (c != '1' && c != 'V' && c != '0'
 				&& c != ' ' && !ft_strchr("NSEW", c))
 			{
-				printf("Error\nInvalid map hi\n");
+				print_map_error();
 				return (false);
 			}
 			j++;
@@ -36,6 +42,16 @@ bool	validate_fill(char **map, t_point size)
 		i++;
 	}
 	return (true);
+}
+
+static void	free_dup_map(char **dup, int height)
+{
+	int	i;
+
+	i = 0;
+	while (i < height)
+		free(dup[i++]);
+	free(dup);
 }
 
 char	**duplicate_map(t_game *game)
@@ -52,9 +68,7 @@ char	**duplicate_map(t_game *game)
 		dup[i] = ft_strdup(game->map.map[i]);
 		if (!dup[i])
 		{
-			while (--i >= 0)
-				free(dup[i]);
-			free(dup);
+			free_dup_map(dup, i);
 			return (NULL);
 		}
 		i++;
