@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:54:46 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/02/13 09:46:10 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/02/13 09:57:35 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,6 +232,7 @@ void			move_forward(t_game *game);
 void			move_backward(t_game *game);
 void			move_left(t_game *game);
 void			move_right(t_game *game);
+int				can_move(t_game *game, int y, int x);
 
 // rotation.c
 void			rotate_right(t_game *game);
