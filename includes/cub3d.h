@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:54:46 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/02/12 08:54:52 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/02/13 09:46:10 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@
 # define A 97
 # define S 115
 # define D 100
+# define P 112
 
 // Mouse settings
 # define MOUSE_SENSITIVITY 0.0002
@@ -71,6 +72,18 @@ typedef struct s_door
 	int			y;
 	int			is_open;
 }				t_door;
+
+typedef struct s_check
+{
+	int			x;
+	int			y;
+}				t_check;
+
+typedef struct t_direction
+{
+	int			dx;
+	int			dy;
+}				t_direction;
 
 typedef struct s_map
 {
@@ -127,6 +140,8 @@ typedef struct s_game
 	t_player	player;
 	t_map		map;
 	t_ray		ray;
+	t_direction	*direction;
+	t_check		*check;
 }				t_game;
 
 typedef struct s_point
@@ -232,5 +247,10 @@ int				key_release(int keycode, t_game *game);
 // mouse.c
 void			center_mouse(t_game *game);
 int				handle_mouse(int x, int y, t_game *game);
+
+// handle_door.c
+void			handle_door(t_game *game);
+void			check_player(t_game *game, t_check *check, int i);
+void			toggle_door(t_game *game, int x, int y);
 
 #endif

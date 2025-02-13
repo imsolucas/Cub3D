@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
+/*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:51:27 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/02/04 17:28:53 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/02/12 15:46:15 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+void    handle_door(t_game *game);
 
 int	loop_hook(t_game *game)
 {
@@ -41,6 +42,8 @@ int	key_hook(int keycode, t_game *game)
 		game->player.rotate_right = true;
 	else if (keycode == SHIFT)
 		game->player.sprint = true;
+	else if (keycode == P)
+		handle_door(game);
 	return (0);
 }
 

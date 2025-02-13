@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:50:38 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/02/12 10:37:22 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/02/12 15:43:36 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ void count_door(t_game *game)
         {
             if (game->map.map[x][y] == 'D')
             {
-                game->map.doors[door_index].x = x;
-                game->map.doors[door_index].y = y;
+                game->map.doors[door_index].x = y;
+                game->map.doors[door_index].y = x;
                 game->map.doors[door_index].is_open = 0;
                 door_index++;
             }
