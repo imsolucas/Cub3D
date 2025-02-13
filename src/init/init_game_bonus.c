@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 09:43:20 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/02/13 10:05:48 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/02/13 14:46:34 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	init_door(t_game *game)
 	if (!game->door_open.img)
 		error_exit("Failed to load door_open texture");
 	game->door_close.img = mlx_xpm_file_to_image(game->mlx,
-			"./textures/mossy.xpm", &game->door_close.width,
+			"./textures/door.xpm", &game->door_close.width,
 			&game->door_close.height);
 	if (!game->door_close.img)
 		error_exit("Failed to load door_close texture");
