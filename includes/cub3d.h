@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
+/*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:54:46 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/02/12 15:41:01 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/02/13 11:33:45 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define CUB3D_H
 
 /* ************************** */
-/*          INCLUDES         */
+/*          INCLUDES          */
 /* ************************** */
 # include "enum.h"
 # include "libft.h"
@@ -29,16 +29,16 @@
 # include <unistd.h>
 
 /* ************************** */
-/*          DEFINES          */
+/*          DEFINES           */
 /* ************************** */
-# define WIN_WIDTH 600
-# define WIN_HEIGHT 480
+# define WIN_WIDTH 1000
+# define WIN_HEIGHT 880
 # define TEXTURE_WIDTH 128
 # define TEXTURE_HEIGHT 128
-# define FRAME_DELAY 200
+# define FRAME_DELAY 500
 
 /* ************************** */
-/*         KEY CODES         */
+/*         KEY CODES          */
 /* ************************** */
 # define ESC 65307
 # define UP 65362
@@ -51,16 +51,17 @@
 # define A 97
 # define S 115
 # define D 100
+# define P 112
 
 /* ************************** */
-/*      MOUSE SETTINGS       */
+/*      MOUSE SETTINGS        */
 /* ************************** */
 # define MOUSE_SENSITIVITY 0.0002
 # define MOUSE_CENTER_X 300
 # define MOUSE_CENTER_Y 240
 
 /* ************************** */
-/*        STRUCTURES         */
+/*        STRUCTURES          */
 /* ************************** */
 typedef struct s_point
 {
@@ -77,6 +78,25 @@ typedef struct s_texture
 	int			height;
 }				t_texture;
 
+typedef struct s_door
+{
+	int			x;
+	int			y;
+	int			is_open;
+}				t_door;
+
+typedef struct s_check
+{
+	int			x;
+	int			y;
+}				t_check;
+
+typedef struct t_direction
+{
+	int			dx;
+	int			dy;
+}				t_direction;
+
 typedef struct s_color
 {
 	int			r;
@@ -89,6 +109,8 @@ typedef struct s_map
 	char		**map;
 	int			width;
 	int			height;
+	int			door_count;
+	t_door		*doors;
 }				t_map;
 
 typedef struct s_player
@@ -123,15 +145,19 @@ typedef struct s_game
 	t_texture	south;
 	t_texture	east;
 	t_texture	west;
+	t_texture	door_open;
+	t_texture	door_close;
 	t_color		floor;
 	t_color		ceiling;
 	t_player	player;
 	t_map		map;
 	t_ray		ray;
+	t_direction	*direction;
+	t_check		*check;
 }				t_game;
 
 /* ************************** */
-/*      INITIALIZATION       */
+/*      INITIALIZATION        */
 /* ************************** */
 void			init_game(t_game *game);
 void			init_mlx(t_game *game);
@@ -145,7 +171,7 @@ void			get_texture_addr(t_game *game);
 void			init_player(t_game *game);
 
 /* ************************** */
-/*         PARSING           */
+/*         PARSING            */
 /* ************************** */
 void			parse(char *file, t_game *game);
 bool			parse_file(char *file, t_game *game);
@@ -156,7 +182,7 @@ bool			parse_map(char *line, t_game *game);
 bool			process_line(char *line, t_game *game, int fd);
 
 /* ************************** */
-/*        VALIDATION         */
+/*        VALIDATION          */
 /* ************************** */
 bool			validate_map(t_game *game);
 bool			validate_textures(t_game *game);
@@ -167,18 +193,23 @@ bool			find_player(t_game *game);
 void			flood_fill_map(char **map, t_point start, t_point size);
 
 /* ************************** */
-/*         MOVEMENT          */
+/*         MOVEMENT           */
 /* ************************** */
 void			move_forward(t_game *game);
 void			move_backward(t_game *game);
 void			move_left(t_game *game);
 void			move_right(t_game *game);
+int				can_move(t_game *game, int y, int x);
+
+/* ************************** */
+/*         ROTATION           */
+/* ************************** */
 void			rotate_right(t_game *game);
 void			rotate_left(t_game *game);
 void			move_player(t_game *game);
 
 /* ************************** */
-/*          EVENTS           */
+/*          EVENTS            */
 /* ************************** */
 int				loop_hook(t_game *game);
 int				key_hook(int keycode, t_game *game);
@@ -187,7 +218,7 @@ int				handle_mouse(int x, int y, t_game *game);
 void			center_mouse(t_game *game);
 
 /* ************************** */
-/*         UTILITIES         */
+/*         UTILITIES		  */
 /* ************************** */
 bool			is_empty_line(char *line);
 void			free_split(char **split);
@@ -202,5 +233,12 @@ char			*get_next_line(int fd);
 void			debug(t_game *game);
 void			error_exit(char *message);
 int				cleanup(t_game *game);
+
+/* ************************** */
+/*         DOOR		          */
+/* ************************** */
+void			handle_door(t_game *game);
+void			check_player(t_game *game, t_check *check, int i);
+void			toggle_door(t_game *game, int x, int y);
 
 #endif

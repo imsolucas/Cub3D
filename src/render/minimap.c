@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:22:57 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/02/03 16:39:59 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/02/13 12:49:21 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	draw_minimap(t_game *game)
 		map_x = (int)mini.ray_x;
 		map_y = (int)mini.ray_y;
 		if (map_x < 0 || map_y < 0 || map_x >= game->map.width
-			|| map_y >= game->map.height || game->map.map[map_y][map_x] == '1')
+			|| map_y >= game->map.height || game->map.map[map_y][map_x] == '1' || game->map.map[map_y][map_x] == 'D')
 			break ;
 		mini.x = (int)((mini.ray_x * MINIMAP_SCALE) + 2 - (MINIMAP_SCALE / 10));
 		mini.y = (int)((mini.ray_y * MINIMAP_SCALE) + 2 - (MINIMAP_SCALE / 10));
@@ -91,6 +91,8 @@ void	draw_minimap_floor(t_game *game)
 				mini.color = 0x333333;
 			else if (game->map.map[y][x] == '0')
 				mini.color = 0x666666;
+			else if (game->map.map[y][x] == 'D')
+				mini.color = 0x00FF00;
 			draw_square(game, &mini);
 		}
 	}

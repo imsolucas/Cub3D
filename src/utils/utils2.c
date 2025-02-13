@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
+/*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:58:05 by imsolucas         #+#    #+#             */
 /*   Updated: 2025/02/12 13:20:49 by imsolucas        ###   ########.fr       */
