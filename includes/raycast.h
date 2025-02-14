@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 15:29:17 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/02/13 11:43:18 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/02/14 11:15:41 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,5 +111,7 @@ void						draw_minimap_floor(t_game *game);
 void						draw_minimap_player(t_game *game);
 void						draw_square(t_game *game, t_mini *mini);
 void						init_minimap(t_game *game, t_mini *mini);
+int							is_ray_blocked(t_game *game, t_mini *mini,
+								int map_x, int map_y);
 
 #endif

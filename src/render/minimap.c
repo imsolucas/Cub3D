@@ -6,20 +6,11 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:22:57 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/02/13 13:24:02 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/02/14 11:15:28 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int	render_frame(t_game *game)
-{
-	draw_floor_ceiling(game);
-	raycasting(game, &game->ray);
-	draw_minimap(game);
-	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
-	return (0);
-}
 
 void	draw_minimap(t_game *game)
 {
@@ -35,9 +26,7 @@ void	draw_minimap(t_game *game)
 	{
 		map_x = (int)mini.ray_x;
 		map_y = (int)mini.ray_y;
-		if (map_x < 0 || map_y < 0 || map_x >= game->map.width
-			|| map_y >= game->map.height || game->map.map[map_y][map_x] == '1'
-			|| game->map.map[map_y][map_x] == 'D')
+		if (is_ray_blocked(game, &mini, map_x, map_y))
 			break ;
 		mini.x = (int)((mini.ray_x * MINIMAP_SCALE) + 2 - (MINIMAP_SCALE / 10));
 		mini.y = (int)((mini.ray_y * MINIMAP_SCALE) + 2 - (MINIMAP_SCALE / 10));

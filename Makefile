@@ -63,7 +63,7 @@ BONUS_FILES	= main_bonus.c \
 			  $(addprefix $(UTILS_DIR), utils.c utils2_bonus.c error.c) \
 			  $(addprefix $(DEBUG_DIR), debug.c) \
 			  $(addprefix $(INIT_DIR), init_game_bonus.c init_elements.c init_struct.c) \
-			  $(addprefix $(RENDER_DIR), draw_bonus.c raycasting.c draw_utils.c minimap.c minimap_utils.c) \
+			  $(addprefix $(RENDER_DIR), render_bonus.c draw_bonus.c raycasting.c draw_utils.c minimap.c minimap_utils.c) \
 			  $(addprefix $(MOVEMENT_DIR), direction.c rotation.c events.c mouse.c) \
 			  $(addprefix $(DOOR_DIR), handle_door.c) \
 
