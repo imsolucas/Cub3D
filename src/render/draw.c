@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 11:21:56 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/02/19 12:21:37 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/02/19 13:19:08 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ void	draw_floor_ceiling(t_game *game)
 
 /**
  * step = how much to increase the texture coordinate per screen pixel
- * tex_pos = starting texture coordinate
+ * tex_pos = starting texture coordinate (we need to fit the texture to draw_start and draw end)
+ * tex_pos is incremented by step in each loop move to the next texture coordinate (down the column)
  */
 void	draw_line(t_game *game, t_ray *ray, int x)
 {
