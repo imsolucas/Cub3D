@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:50:38 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/02/13 11:24:37 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/02/19 10:39:19 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,23 +53,23 @@ void	assign_door_index(t_game *game, int x, int y)
 	game->map.doors = malloc(sizeof(t_door) * game->map.door_count);
 	if (!game->map.doors)
 		return ;
-	x = 0;
+	y = 0;
 	door_index = 0;
-	while (x < game->map.height)
+	while (y < game->map.height)
 	{
-		y = 0;
-		while (y < game->map.width)
+		x = 0;
+		while (x < game->map.width)
 		{
-			if (game->map.map[x][y] == 'D')
+			if (game->map.map[y][x] == 'D')
 			{
-				game->map.doors[door_index].x = y;
-				game->map.doors[door_index].y = x;
+				game->map.doors[door_index].y = y;
+				game->map.doors[door_index].x = x;
 				game->map.doors[door_index].is_open = 0;
 				door_index++;
 			}
-			y++;
+			x++;
 		}
-		x++;
+		y++;
 	}
 }
 
@@ -78,18 +78,18 @@ void	count_door(t_game *game)
 	int	x;
 	int	y;
 
-	x = 0;
+	y = 0;
 	game->map.door_count = 0;
-	while (x < game->map.height)
+	while (y < game->map.height)
 	{
-		y = 0;
-		while (y < game->map.width)
+		x = 0;
+		while (x < game->map.width)
 		{
-			if (game->map.map[x][y] == 'D')
+			if (game->map.map[y][x] == 'D')
 				game->map.door_count++;
-			y++;
+			x++;
 		}
-		x++;
+		y++;
 	}
 	assign_door_index(game, x, y);
 }
