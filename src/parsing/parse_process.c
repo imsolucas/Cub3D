@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_process.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
+/*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 13:12:42 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/02/12 13:03:41 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/02/19 14:38:25 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,5 @@ bool	parse_file(char *file, t_game *game)
 		return (clean_and_error(NULL, fd));
 	if (!validate_map_closed(game))
 		return (clean_and_error(NULL, fd));
-	debug(game);
 	return (true);
 }
