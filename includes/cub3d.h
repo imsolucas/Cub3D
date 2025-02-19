@@ -6,7 +6,7 @@
 /*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:54:46 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/02/19 16:09:04 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/02/20 01:06:07 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,8 +245,8 @@ void			count_door(t_game *game);
 /* ************************** */
 /*         RENDERING          */
 /* ************************** */
-void    draw_border_pixel(t_game *game, int x, int y, t_mini *mini);
-void    draw_minimap_rays(t_game *game, t_mini *mini);
-void    draw_ray_point(t_game *game, t_mini *mini);
+void			draw_border_pixel(t_game *game, int x, int y, t_mini *mini);
+void			draw_minimap_rays(t_game *game, t_mini *mini);
+void			draw_ray_point(t_game *game, t_mini *mini);
 
 #endif
