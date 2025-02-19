@@ -6,7 +6,7 @@
 /*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 14:28:59 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/02/19 14:41:24 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/02/19 15:17:25 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,25 +28,19 @@ void	draw_square(t_game *game, t_mini *mini)
 
 int	is_ray_blocked(t_game *game, t_mini *mini, int map_x, int map_y)
 {
-	if (map_x < 0 || map_y < 0 || map_y >= game->map.height ||
+	if (map_x < 0 || map_y < 0 || map_y >= game->map.height || \
 		map_x >= (int)ft_strlen(game->map.map[map_y]))
 		return (1);
-
 	if (game->map.map[map_y][map_x] == '1'
 		|| game->map.map[map_y][map_x] == 'D')
 		return (1);
-
-	// Check left wall collision
-	if (map_x > 0 && game->map.map[map_y][map_x - 1] == '1' 
+	if (map_x > 0 && game->map.map[map_y][map_x - 1] == '1'
 		&& mini->ray_x - map_x < 0.1)
 		return (1);
-
-	// Check upper wall collision
-	if (map_y > 0 && map_x < (int)ft_strlen(game->map.map[map_y - 1]) 
-		&& game->map.map[map_y - 1][map_x] == '1' 
+	if (map_y > 0 && map_x < (int)ft_strlen(game->map.map[map_y - 1])
+		&& game->map.map[map_y - 1][map_x] == '1'
 		&& mini->ray_y - map_y < 0.1)
 		return (1);
-
 	return (0);
 }
 

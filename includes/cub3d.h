@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:54:46 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/02/19 11:10:00 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/02/19 16:02:45 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,6 +190,7 @@ bool			validate_map_closed(t_game *game);
 bool			validate_fill(char **map, t_point size);
 bool			find_player(t_game *game);
 void			flood_fill_map(char **map, t_point start, t_point size);
+bool			check_boundaries(char **map, t_point size);
 
 /* ************************** */
 /*         MOVEMENT           */
@@ -239,5 +240,13 @@ int				cleanup(t_game *game);
 void			handle_door(t_game *game);
 void			check_player(t_game *game, t_check *check, int i);
 void			toggle_door(t_game *game, int x, int y);
+void			count_door(t_game *game);
+
+/* ************************** */
+/*         RENDERING          */
+/* ************************** */
+void    draw_border_pixel(t_game *game, int x, int y, t_mini *mini);
+void    draw_minimap_rays(t_game *game, t_mini *mini);
+void    draw_ray_point(t_game *game, t_mini *mini);
 
 #endif
