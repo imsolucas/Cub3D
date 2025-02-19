@@ -3,24 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:50:38 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/02/19 10:39:19 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/02/19 14:37:28 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static bool	check_space_neighbors(char **map, int i, int j, t_point size)
+static bool	is_valid_pos(int i, int j, char **map, t_point size)
 {
-	if (i > 0 && map[i - 1][j] != '1' && map[i - 1][j] != ' ')
+	if (i < 0 || i >= size.y)
 		return (false);
-	if (i < size.y - 1 && map[i + 1][j] != '1' && map[i + 1][j] != ' ')
+	if (j < 0 || j >= (int)ft_strlen(map[i]))
 		return (false);
-	if (j > 0 && map[i][j - 1] != '1' && map[i][j - 1] != ' ')
+	return (true);
+}
+
+static bool	is_surrounded_by_walls(char **map, int i, int j, t_point size)
+{
+	if (!is_valid_pos(i - 1, j, map, size) || 
+		map[i - 1][j] == ' ' || j >= (int)ft_strlen(map[i - 1]))
 		return (false);
-	if (j < size.x - 1 && map[i][j + 1] != '1' && map[i][j + 1] != ' ')
+	if (!is_valid_pos(i + 1, j, map, size) || 
+		map[i + 1][j] == ' ' || j >= (int)ft_strlen(map[i + 1]))
+		return (false);
+	if (!is_valid_pos(i, j - 1, map, size) || map[i][j - 1] == ' ')
+		return (false);
+	if (!is_valid_pos(i, j + 1, map, size) || map[i][j + 1] == ' ')
 		return (false);
 	return (true);
 }
@@ -29,18 +40,20 @@ static bool	check_boundaries(char **map, t_point size)
 {
 	int	i;
 	int	j;
+	int	line_len;
 
 	i = -1;
 	while (++i < size.y)
 	{
+		line_len = ft_strlen(map[i]);
 		j = -1;
-		while (++j < size.x)
+		while (++j < line_len)
 		{
-			if ((i == 0 || i == size.y - 1 || j == 0 || j == size.x - 1)
-				&& map[i][j] != '1' && map[i][j] != ' ')
-				return (false);
-			if (map[i][j] == ' ' && !check_space_neighbors(map, i, j, size))
-				return (false);
+			if (map[i][j] != '1' && map[i][j] != ' ')
+			{
+				if (!is_surrounded_by_walls(map, i, j, size))
+					return (false);
+			}
 		}
 	}
 	return (true);
@@ -53,23 +66,23 @@ void	assign_door_index(t_game *game, int x, int y)
 	game->map.doors = malloc(sizeof(t_door) * game->map.door_count);
 	if (!game->map.doors)
 		return ;
-	y = 0;
+	x = 0;
 	door_index = 0;
-	while (y < game->map.height)
+	while (x < game->map.height)
 	{
-		x = 0;
-		while (x < game->map.width)
+		y = 0;
+		while (y < (int)ft_strlen(game->map.map[x]))
 		{
-			if (game->map.map[y][x] == 'D')
+			if (game->map.map[x][y] == 'D')
 			{
-				game->map.doors[door_index].y = y;
-				game->map.doors[door_index].x = x;
+				game->map.doors[door_index].x = y;
+				game->map.doors[door_index].y = x;
 				game->map.doors[door_index].is_open = 0;
 				door_index++;
 			}
-			x++;
+			y++;
 		}
-		y++;
+		x++;
 	}
 }
 
@@ -78,18 +91,18 @@ void	count_door(t_game *game)
 	int	x;
 	int	y;
 
-	y = 0;
+	x = 0;
 	game->map.door_count = 0;
-	while (y < game->map.height)
+	while (x < game->map.height)
 	{
-		x = 0;
-		while (x < game->map.width)
+		y = 0;
+		while (y < (int)ft_strlen(game->map.map[x]))
 		{
-			if (game->map.map[y][x] == 'D')
+			if (game->map.map[x][y] == 'D')
 				game->map.door_count++;
-			x++;
+			y++;
 		}
-		y++;
+		x++;
 	}
 	assign_door_index(game, x, y);
 }
