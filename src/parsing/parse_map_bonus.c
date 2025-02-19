@@ -6,7 +6,7 @@
 /*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:47:18 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/02/12 13:28:02 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/02/19 14:37:43 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int	ft_max(int a, int b)
 static bool	is_valid_map_char(char c)
 {
 	return (c == '0' || c == '1' || c == 'N' || c == 'S'
-		|| c == 'E' || c == 'W' || c == ' ' || c == '\n' || c == 'D');
+		|| c == 'E' || c == 'W' || c == ' ' || c == '\n'
+		|| c == 'D' || c == 'C');
 }
 
 static bool	validate_map_chars(char *line)
@@ -39,25 +40,18 @@ static bool	validate_map_chars(char *line)
 static bool	copy_line_to_map(char *line, t_game *game, int row)
 {
 	int		line_len;
-	int		i;
 	char	*map_line;
 
 	line_len = ft_strlen(line);
 	if (line[line_len - 1] == '\n')
 		line_len--;
 	game->map.width = ft_max(game->map.width, line_len);
-	map_line = malloc(sizeof(char) * (game->map.width + 1));
+	map_line = malloc(sizeof(char) * (line_len + 1));
 	if (!map_line)
 		return (false);
-	i = 0;
-	while (i < line_len && line[i] != '\n')
-	{
-		map_line[i] = line[i];
-		i++;
-	}
-	while (i < game->map.width)
-		map_line[i++] = ' ';
-	map_line[i] = '\0';
+	ft_strlcpy(map_line, line, line_len + 1);
+	if (line[line_len - 1] == '\n')
+		map_line[line_len - 1] = '\0';
 	game->map.map[row] = map_line;
 	return (true);
 }

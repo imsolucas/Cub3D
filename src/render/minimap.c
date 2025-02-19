@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:22:57 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/02/14 11:15:28 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/02/19 14:41:14 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static bool	is_valid_map_pos(t_game *game, int x, int y)
+{
+	if (y < 0 || y >= game->map.height)
+		return (false);
+	if (x < 0 || x >= (int)ft_strlen(game->map.map[y]))
+		return (false);
+	return (true);
+}
 
 void	draw_minimap(t_game *game)
 {
@@ -72,8 +81,10 @@ void	draw_minimap_floor(t_game *game)
 	while (++y < game->map.height)
 	{
 		x = -1;
-		while (++x < game->map.width)
+		while (++x < (int)ft_strlen(game->map.map[y]))
 		{
+			if (!is_valid_map_pos(game, x, y))
+				continue;
 			mini.x = x * MINIMAP_SCALE + 2;
 			mini.y = y * MINIMAP_SCALE + 2;
 			mini.size = MINIMAP_SCALE;
