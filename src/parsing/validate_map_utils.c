@@ -6,7 +6,7 @@
 /*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:20:38 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/02/12 15:36:20 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/02/19 14:31:13 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ bool	validate_fill(char **map, t_point size)
 	while (i < size.y)
 	{
 		j = 0;
-		while (j < size.x)
+		while (j < (int)ft_strlen(map[i]))
 		{
 			c = map[i][j];
 			if (c != '1' && c != 'V' && c != '0'
@@ -58,6 +58,7 @@ char	**duplicate_map(t_game *game)
 {
 	char	**dup;
 	int		i;
+	size_t	line_len;
 
 	dup = malloc(sizeof(char *) * game->map.height);
 	if (!dup)
@@ -65,12 +66,14 @@ char	**duplicate_map(t_game *game)
 	i = 0;
 	while (i < game->map.height)
 	{
-		dup[i] = ft_strdup(game->map.map[i]);
+		line_len = ft_strlen(game->map.map[i]);
+		dup[i] = malloc(line_len + 1);
 		if (!dup[i])
 		{
 			free_dup_map(dup, i);
 			return (NULL);
 		}
+		ft_strlcpy(dup[i], game->map.map[i], line_len + 1);
 		i++;
 	}
 	return (dup);
