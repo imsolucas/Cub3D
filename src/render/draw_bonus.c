@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 08:51:57 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/02/13 11:42:30 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/02/19 11:05:14 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,7 @@ int	set_door_texture(t_game *game, t_ray *ray)
 		if (game->map.doors[i].x == ray->map_x
 			&& game->map.doors[i].y == ray->map_y)
 		{
-			if (game->map.doors[i].is_open)
-				ray->current_texture = &game->door_open;
-			else
+			if (!game->map.doors[i].is_open)
 				ray->current_texture = &game->door_close;
 			return (1);
 		}
@@ -82,8 +80,7 @@ void	set_texture(t_game *game, t_ray *ray)
 		ray->tex_x = TEXTURE_WIDTH - ray->tex_x - 1;
 	if (set_door_texture(game, ray))
 		return ;
-	if (ray->current_texture == &game->door_open
-		|| ray->current_texture == &game->door_close)
+	if (ray->current_texture == &game->door_close)
 		return ;
 	if (ray->side == 0)
 	{
