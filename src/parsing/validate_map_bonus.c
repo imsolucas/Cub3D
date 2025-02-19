@@ -6,7 +6,7 @@
 /*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:50:38 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/02/19 14:37:28 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/02/19 15:16:22 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ static bool	is_valid_pos(int i, int j, char **map, t_point size)
 
 static bool	is_surrounded_by_walls(char **map, int i, int j, t_point size)
 {
-	if (!is_valid_pos(i - 1, j, map, size) || 
+	if (!is_valid_pos(i - 1, j, map, size) || \
 		map[i - 1][j] == ' ' || j >= (int)ft_strlen(map[i - 1]))
 		return (false);
-	if (!is_valid_pos(i + 1, j, map, size) || 
+	if (!is_valid_pos(i + 1, j, map, size) || \
 		map[i + 1][j] == ' ' || j >= (int)ft_strlen(map[i + 1]))
 		return (false);
 	if (!is_valid_pos(i, j - 1, map, size) || map[i][j - 1] == ' ')
@@ -36,7 +36,7 @@ static bool	is_surrounded_by_walls(char **map, int i, int j, t_point size)
 	return (true);
 }
 
-static bool	check_boundaries(char **map, t_point size)
+bool	check_boundaries(char **map, t_point size)
 {
 	int	i;
 	int	j;
@@ -105,32 +105,4 @@ void	count_door(t_game *game)
 		x++;
 	}
 	assign_door_index(game, x, y);
-}
-
-bool	validate_map_closed(t_game *game)
-{
-	char	**temp_map;
-	bool	valid;
-	t_point	size;
-	t_point	start;
-
-	if (!game->map.map || game->map.height == 0)
-		return (false);
-	if (!find_player(game))
-		return (false);
-	count_door(game);
-	temp_map = duplicate_map(game);
-	if (!temp_map)
-		return (false);
-	size = (t_point){game->map.width, game->map.height};
-	start = (t_point){(int)game->player.x, (int)game->player.y};
-	if (!check_boundaries(temp_map, size))
-	{
-		free_temp_map(temp_map, game->map.height);
-		return (false);
-	}
-	flood_fill_map(temp_map, start, size);
-	valid = validate_fill(temp_map, size);
-	free_temp_map(temp_map, game->map.height);
-	return (valid);
 }

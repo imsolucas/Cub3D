@@ -6,7 +6,7 @@
 /*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:50:38 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/02/19 14:32:04 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/02/19 16:11:24 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static bool	is_surrounded_by_walls(char **map, int i, int j, t_point size)
 	return (true);
 }
 
-static bool	check_boundaries(char **map, t_point size)
+static bool	check_boundary(char **map, t_point size)
 {
 	int	i;
 	int	j;
@@ -75,7 +75,7 @@ bool	validate_map_closed(t_game *game)
 		return (false);
 	size = (t_point){game->map.width, game->map.height};
 	start = (t_point){(int)game->player.x, (int)game->player.y};
-	if (!check_boundaries(temp_map, size))
+	if (!check_boundary(temp_map, size))
 	{
 		free_temp_map(temp_map, game->map.height);
 		return (false);
