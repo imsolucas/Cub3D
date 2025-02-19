@@ -1,61 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   parse_process.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 13:12:42 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/02/12 13:39:15 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/02/12 13:03:41 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static bool	handle_element(char *line, t_game *game, int fd, int element)
+static bool	process_all_lines(int fd, t_game *game)
 {
-	if (element == TYPE_TEXTURE || element == TYPE_COLOR)
+	char	*line;
+	int		type;
+	bool	map_started;
+
+	map_started = false;
+	line = get_next_line(fd);
+	while (line)
 	{
-		if (!parse_element(line, game, element))
-		{
-			free(line);
-			close(fd);
+		type = element_type(line);
+		if (type == TYPE_MAP)
+			map_started = true;
+		if (!validate_element_order(type, map_started))
+			return (clean_and_error(line, fd));
+		if (!process_line(line, game, fd))
 			return (false);
-		}
-	}
-	else if (element == TYPE_MAP)
-	{
-		if (!parse_map(line, game))
-		{
-			free(line);
-			close(fd);
-			return (false);
-		}
+		line = get_next_line(fd);
 	}
 	return (true);
 }
 
-bool	process_line(char *line, t_game *game, int fd)
+bool	parse_file(char *file, t_game *game)
 {
-	int	element;
+	int		fd;
 
-	if (is_empty_line(line))
-	{
-		free(line);
+	fd = open(file, O_RDONLY);
+	if (fd < 0)
 		return (false);
-	}
-	element = element_type(line);
-	if (!handle_element(line, game, fd, element))
+	if (!process_all_lines(fd, game))
 		return (false);
-	free(line);
+	if (!validate_textures(game))
+		return (clean_and_error(NULL, fd));
+	if (!validate_map_closed(game))
+		return (clean_and_error(NULL, fd));
+	debug(game);
 	return (true);
-}
-
-void	parse(char *file, t_game *game)
-{
-	if (!parse_file(file, game))
-	{
-		printf("Error\nInvalid file\n");
-		exit(1);
-	}
 }

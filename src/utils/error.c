@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 11:58:50 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/01/23 15:53:19 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/02/19 11:11:11 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,16 @@ void	error_exit(char *message)
 	exit(1);
 }
 
-int	cleanup(t_game *game)
+void	free_doors(t_game *game)
+{
+	if (game->map.doors)
+	{
+		free(game->map.doors);
+		game->map.doors = NULL;
+	}
+}
+
+void	free_img(t_game *game)
 {
 	if (game->north.img)
 		mlx_destroy_image(game->mlx, game->north.img);
@@ -29,6 +38,13 @@ int	cleanup(t_game *game)
 		mlx_destroy_image(game->mlx, game->west.img);
 	if (game->east.img)
 		mlx_destroy_image(game->mlx, game->east.img);
+	if (game->door_close.img)
+		mlx_destroy_image(game->mlx, game->door_close.img);
+}
+
+int	cleanup(t_game *game)
+{
+	free_img(game);
 	if (game->img)
 		mlx_destroy_image(game->mlx, game->img);
 	if (game->win)
@@ -39,8 +55,24 @@ int	cleanup(t_game *game)
 		free(game->mlx);
 	}
 	free_map(game);
+	free_doors(game);
 	free_texture_path(game);
 	free(game);
 	exit(0);
 	return (0);
+}
+
+void	free_temp_map(char **map, int height)
+{
+	int	i;
+
+	if (!map)
+		return ;
+	i = 0;
+	while (i < height)
+	{
+		free(map[i]);
+		i++;
+	}
+	free(map);
 }

@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:51:27 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/01/23 16:06:14 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/02/19 10:37:12 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@ int	key_hook(int keycode, t_game *game)
 		game->player.rotate_left = true;
 	else if (keycode == RIGHT)
 		game->player.rotate_right = true;
+	else if (keycode == SHIFT)
+		game->player.sprint = true;
+	else if (keycode == P)
+		handle_door(game);
 	return (0);
 }
 
@@ -58,6 +62,8 @@ int	key_release(int keycode, t_game *game)
 		game->player.rotate_left = false;
 	else if (keycode == RIGHT)
 		game->player.rotate_right = false;
+	else if (keycode == SHIFT)
+		game->player.sprint = false;
 	return (0);
 }
 

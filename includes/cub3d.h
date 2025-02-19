@@ -6,13 +6,16 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:54:46 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/01/23 16:05:39 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/02/19 11:10:00 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
+/* ************************** */
+/*          INCLUDES          */
+/* ************************** */
 # include "enum.h"
 # include "libft.h"
 # include "mlx.h"
@@ -25,29 +28,46 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define WIN_WIDTH 800
-# define WIN_HEIGHT 600
+/* ************************** */
+/*          DEFINES           */
+/* ************************** */
+# define WIN_WIDTH 1000
+# define WIN_HEIGHT 880
 # define TEXTURE_WIDTH 128
 # define TEXTURE_HEIGHT 128
-# define FRAME_DELAY 1000
+# define FRAME_DELAY 500
 
-// keycodes
-// # define ESC 53
-// # define UP 126
-// # define DOWN 125
-// # define LEFT 123
-// # define RIGHT 124
-
+/* ************************** */
+/*         KEY CODES          */
+/* ************************** */
 # define ESC 65307
 # define UP 65362
 # define DOWN 65364
 # define LEFT 65361
 # define RIGHT 65363
+# define SHIFT 65505
 
 # define W 119
 # define A 97
 # define S 115
 # define D 100
+# define P 112
+
+/* ************************** */
+/*      MOUSE SETTINGS        */
+/* ************************** */
+# define MOUSE_SENSITIVITY 0.0002
+# define MOUSE_CENTER_X 300
+# define MOUSE_CENTER_Y 240
+
+/* ************************** */
+/*        STRUCTURES          */
+/* ************************** */
+typedef struct s_point
+{
+	int			x;
+	int			y;
+}				t_point;
 
 typedef struct s_texture
 {
@@ -58,11 +78,39 @@ typedef struct s_texture
 	int			height;
 }				t_texture;
 
+typedef struct s_door
+{
+	int			x;
+	int			y;
+	int			is_open;
+}				t_door;
+
+typedef struct s_check
+{
+	int			x;
+	int			y;
+}				t_check;
+
+typedef struct t_direction
+{
+	int			dx;
+	int			dy;
+}				t_direction;
+
+typedef struct s_color
+{
+	int			r;
+	int			g;
+	int			b;
+}				t_color;
+
 typedef struct s_map
 {
 	char		**map;
 	int			width;
 	int			height;
+	int			door_count;
+	t_door		*doors;
 }				t_map;
 
 typedef struct s_player
@@ -80,14 +128,8 @@ typedef struct s_player
 	bool		move_right;
 	bool		rotate_left;
 	bool		rotate_right;
+	bool		sprint;
 }				t_player;
-
-typedef struct s_color
-{
-	int			r;
-	int			g;
-	int			b;
-}				t_color;
 
 typedef struct s_game
 {
@@ -103,93 +145,99 @@ typedef struct s_game
 	t_texture	south;
 	t_texture	east;
 	t_texture	west;
+	t_texture	door_close;
 	t_color		floor;
 	t_color		ceiling;
 	t_player	player;
 	t_map		map;
 	t_ray		ray;
+	t_direction	*direction;
+	t_check		*check;
 }				t_game;
 
-typedef struct s_point
-{
-	int			x;
-	int			y;
-}				t_point;
-
-// utils.c
-bool			is_empty_line(char *line);
-void			free_split(char **split);
-void			free_texture_path(t_game *game);
-void			free_map(t_game *game);
-int				element_type(char *line);
-bool			clean_and_error(char *line, int fd);
-int				key_hook(int keycode, t_game *game);
-
-// error.c
-void			error_exit(char *message);
-void			free_map(t_game *game);
-int				cleanup(t_game *game);
-
-// parse.c
-void			parse(char *file, t_game *game);
-bool			parse_file(char *file, t_game *game);
-
-// parse_utils.c
-bool			parse_element(char *line, t_game *game, int element_type);
-bool			parse_texture(char **split, t_game *game);
-bool			parse_color(char **split, t_game *game);
-
-// parse_map.c
-bool			parse_map(char *line, t_game *game);
-bool			validate_map(t_game *game);
-
-// get_next_line.c
-char			*get_next_line(int fd);
-
-// ft_split_whitespace.c
-char			**ft_split_whitespace(char *str);
-
-// init_struct.c
+/* ************************** */
+/*      INITIALIZATION        */
+/* ************************** */
+void			init_game(t_game *game);
+void			init_mlx(t_game *game);
 void			init_struct(t_game *game);
 void			init_struct_game(t_game *game);
 void			init_struct_texture(t_game *game);
 void			init_struct_player(t_game *game);
 void			init_struct_map_ray(t_game *game);
-
-// init_game.c
-void			init_game(t_game *game);
-void			init_mlx(t_game *game);
-
-// init_elements.c
 void			init_texture(t_game *game);
 void			get_texture_addr(t_game *game);
 void			init_player(t_game *game);
 
-// debug.c
-void			debug(t_game *game);
+/* ************************** */
+/*         PARSING            */
+/* ************************** */
+void			parse(char *file, t_game *game);
+bool			parse_file(char *file, t_game *game);
+bool			parse_element(char *line, t_game *game, int element_type);
+bool			parse_texture(char **split, t_game *game);
+bool			parse_color(char **split, t_game *game);
+bool			parse_map(char *line, t_game *game);
+bool			process_line(char *line, t_game *game, int fd);
 
-// validate_map.c
+/* ************************** */
+/*        VALIDATION          */
+/* ************************** */
+bool			validate_map(t_game *game);
+bool			validate_textures(t_game *game);
+bool			validate_element_order(int current_type, bool map_started);
 bool			validate_map_closed(t_game *game);
-
-// validate_map_utils.c
-char			**duplicate_map(t_game *game);
 bool			validate_fill(char **map, t_point size);
+bool			find_player(t_game *game);
+void			flood_fill_map(char **map, t_point start, t_point size);
 
-// direction.c
+/* ************************** */
+/*         MOVEMENT           */
+/* ************************** */
 void			move_forward(t_game *game);
 void			move_backward(t_game *game);
 void			move_left(t_game *game);
 void			move_right(t_game *game);
+int				can_move(t_game *game, int y, int x);
 
-// rotation.c
+/* ************************** */
+/*         ROTATION           */
+/* ************************** */
 void			rotate_right(t_game *game);
 void			rotate_left(t_game *game);
+void			move_player(t_game *game);
 
-// events.c
+/* ************************** */
+/*          EVENTS            */
+/* ************************** */
 int				loop_hook(t_game *game);
 int				key_hook(int keycode, t_game *game);
-void			move_player(t_game *game);
-int				loop_hook(t_game *game);
 int				key_release(int keycode, t_game *game);
+int				handle_mouse(int x, int y, t_game *game);
+void			center_mouse(t_game *game);
+
+/* ************************** */
+/*         UTILITIES		  */
+/* ************************** */
+bool			is_empty_line(char *line);
+void			free_split(char **split);
+void			free_texture_path(t_game *game);
+void			free_map(t_game *game);
+void			free_temp_map(char **map, int height);
+int				element_type(char *line);
+bool			clean_and_error(char *line, int fd);
+char			**duplicate_map(t_game *game);
+char			**ft_split_whitespace(char *str);
+char			*get_next_line(int fd);
+void			debug(t_game *game);
+void			error_exit(char *message);
+int				cleanup(t_game *game);
+
+/* ************************** */
+/*         DOOR		          */
+/* ************************** */
+void			handle_door(t_game *game);
+void			check_player(t_game *game, t_check *check, int i);
+void			toggle_door(t_game *game, int x, int y);
 
 #endif

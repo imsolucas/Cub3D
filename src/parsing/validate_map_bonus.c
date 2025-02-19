@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validate_map.c                                     :+:      :+:    :+:   */
+/*   validate_map_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
+/*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:50:38 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/02/04 16:37:55 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/02/19 10:39:19 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,54 @@ static bool	check_boundaries(char **map, t_point size)
 	return (true);
 }
 
+void	assign_door_index(t_game *game, int x, int y)
+{
+	int	door_index;
+
+	game->map.doors = malloc(sizeof(t_door) * game->map.door_count);
+	if (!game->map.doors)
+		return ;
+	y = 0;
+	door_index = 0;
+	while (y < game->map.height)
+	{
+		x = 0;
+		while (x < game->map.width)
+		{
+			if (game->map.map[y][x] == 'D')
+			{
+				game->map.doors[door_index].y = y;
+				game->map.doors[door_index].x = x;
+				game->map.doors[door_index].is_open = 0;
+				door_index++;
+			}
+			x++;
+		}
+		y++;
+	}
+}
+
+void	count_door(t_game *game)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	game->map.door_count = 0;
+	while (y < game->map.height)
+	{
+		x = 0;
+		while (x < game->map.width)
+		{
+			if (game->map.map[y][x] == 'D')
+				game->map.door_count++;
+			x++;
+		}
+		y++;
+	}
+	assign_door_index(game, x, y);
+}
+
 bool	validate_map_closed(t_game *game)
 {
 	char	**temp_map;
@@ -57,6 +105,7 @@ bool	validate_map_closed(t_game *game)
 		return (false);
 	if (!find_player(game))
 		return (false);
+	count_door(game);
 	temp_map = duplicate_map(game);
 	if (!temp_map)
 		return (false);
