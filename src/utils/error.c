@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 11:58:50 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/02/13 11:05:57 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/02/19 11:11:11 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ void	free_img(t_game *game)
 		mlx_destroy_image(game->mlx, game->west.img);
 	if (game->east.img)
 		mlx_destroy_image(game->mlx, game->east.img);
-	if (game->door_open.img)
-		mlx_destroy_image(game->mlx, game->door_open.img);
 	if (game->door_close.img)
 		mlx_destroy_image(game->mlx, game->door_close.img);
 }

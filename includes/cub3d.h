@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:54:46 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/02/13 11:33:45 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/02/19 11:10:00 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,6 @@ typedef struct s_game
 	t_texture	south;
 	t_texture	east;
 	t_texture	west;
-	t_texture	door_open;
 	t_texture	door_close;
 	t_color		floor;
 	t_color		ceiling;

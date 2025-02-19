@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 11:21:56 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/02/12 08:51:42 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/02/19 13:29:57 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,13 @@ void	draw_floor_ceiling(t_game *game)
 	}
 }
 
+/**
+ * step = how much to increase the texture coordinate per screen pixel
+ * tex_pos = starting texture coordinate (we need to fit the texture 
+ * to draw_start and draw end)
+ * tex_pos is incremented by step in each loop move to the next 
+ * texture coordinate (down the column)
+ */
 void	draw_line(t_game *game, t_ray *ray, int x)
 {
 	int		y;
@@ -52,6 +59,12 @@ void	draw_line(t_game *game, t_ray *ray, int x)
 	}
 }
 
+/**
+ * tex_x = determines which column of the texture to use
+ * 
+ * When ray hits left/downward wall, the texture will look reversed. 
+ * Need to be corrected
+ */
 void	set_texture(t_game *game, t_ray *ray)
 {
 	ray->tex_x = (int)(ray->wall_x * TEXTURE_WIDTH);
