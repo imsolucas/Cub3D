@@ -58,7 +58,7 @@ SRC_FILES	= main.c \
 BONUS_FILES	= main_bonus.c \
 			  $(addprefix $(PARSE_DIR), parse.c parse_validate.c parse_process.c \
 			  ft_split_whitespace.c parse_map_bonus.c parse_utils.c parse_utils2.c \
-			  validate_map_flood.c floodfill.c validate_map_utils.c validate_map_bonus.c) \
+			  validate_map_flood.c floodfill.c validate_map_utils_bonus.c validate_map_bonus.c) \
 			  $(addprefix $(GNL_DIR), get_next_line.c) \
 			  $(addprefix $(UTILS_DIR), utils.c utils2_bonus.c error.c) \
 			  $(addprefix $(DEBUG_DIR), debug.c) \

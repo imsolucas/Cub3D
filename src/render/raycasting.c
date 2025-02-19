@@ -6,7 +6,7 @@
 /*   By: abinti-a <abinti-a@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 15:07:52 by abinti-a          #+#    #+#             */
-/*   Updated: 2025/02/13 09:50:13 by abinti-a         ###   ########.fr       */
+/*   Updated: 2025/02/19 14:37:10 by abinti-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,8 @@ void	calc_line_height(t_ray *ray, t_player *player)
 		ray->perp_wall_dist = (ray->side_dist_x - ray->delta_dist_x);
 	else
 		ray->perp_wall_dist = (ray->side_dist_y - ray->delta_dist_y);
+	if (ray->perp_wall_dist <= 0.0001)
+		ray->perp_wall_dist = 0.0001;
 	ray->line_height = (int)(WIN_HEIGHT / ray->perp_wall_dist);
 	ray->draw_start = (WIN_HEIGHT / 2.0) - (ray->line_height / 2);
 	if (ray->draw_start < 0)

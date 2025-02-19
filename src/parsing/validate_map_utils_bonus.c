@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validate_map_utils.c                               :+:      :+:    :+:   */
+/*   validate_map_utils_bonus.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: imsolucas <imsolucas@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:20:38 by imsolucas         #+#    #+#             */
-/*   Updated: 2025/02/19 14:31:13 by imsolucas        ###   ########.fr       */
+/*   Updated: 2025/02/19 14:38:14 by imsolucas        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ bool	validate_fill(char **map, t_point size)
 		while (j < (int)ft_strlen(map[i]))
 		{
 			c = map[i][j];
-			if (c != '1' && c != 'V' && c != '0'
+			if (c != '1' && c != 'V' && c != '0' && c != 'D' && c != 'C'
 				&& c != ' ' && !ft_strchr("NSEW", c))
 			{
 				print_map_error();
