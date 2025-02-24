@@ -26,7 +26,7 @@ make
 ```
 This will generate the `cub3D` executable.
 
-To compile cub3D bonus (see [Bonus Features](#bonus-features)), run:
+To compile cub3D bonus (see [Bonus Features](#-bonus-features)), run:
 ```sh
 make bonus
 ```
