@@ -53,11 +53,11 @@ make re_bonus
 ## 🔧 Usage
 Run the program with a valid `.cub` map file:
 ```sh
-./cub3D maps/example.cub
+./cub3D map/example.cub
 ```
 
 ```sh
-./cub3D_bonus maps/example.cub
+./cub3D_bonus map/example.cub
 ```
 
 ### 🎮 Controls
